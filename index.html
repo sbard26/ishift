@@ -72,72 +72,78 @@
               return Math.min.apply(null, numArray);
             }
             var myFirebaseRef = new Firebase("https://amber-inferno-6999.firebaseio.com/");
-            //This is only for testing purposes
-            myFirebaseRef.set({
-              storehours: {
-                mondaystart: "8",
-                mondayend: "17",
-                tuesdaystart: "6",
-                tuesdayend: "18",
-                wednesdaystart: "10",
-                wednesdayend: "15",
-                thursdaystart: "8",
-                thursdayend: "17",
-                fridaystart: "5",
-                fridayend: "17",
-                saturdaystart: "8",
-                saturdayend: "17",
-                sundaystart: "8",
-                sundayend: "20"
-              }
-            });
+            // This is only for testing purposes
+            // myFirebaseRef.set({
+            //     storehours: {
+            //         sunday: [10, 11, 12, 13, 14, 15],
+            //         monday: [8, 9, 10, 11, 12, 13, 14, 15, 16, 17],
+            //         tuesday: [8, 9, 10, 11, 12, 13, 14, 15, 16, 17],
+            //         wednesday: [8, 9, 10, 11, 12, 13, 14, 15, 16, 17],
+            //         thursday: [8, 9, 10, 11, 12, 13, 14, 15, 16, 17],
+            //         friday: [8, 9, 10, 11, 12, 13, 14, 15, 16, 17],
+            //         saturday: [10, 11, 12, 13, 14, 15]
+            //     }
+            // });
             myFirebaseRef.on("value", function(snapshot) {
                 storehours = snapshot.val().storehours;
-                hours_list = [storehours.mondaystart, storehours.mondayend, storehours.tuesdaystart, storehours.tuesdayend,
-                            storehours.wednesdaystart, storehours.wednesdayend, storehours.thursdaystart,
-                            storehours.thursdayend, storehours.fridaystart, storehours.fridayend, storehours.saturdaystart,
-                            storehours.saturdayend, storehours.sundaystart, storehours.sundayend]
+                hours_list = []
+                hours_list.push.apply(hours_list, storehours.sunday)
+                hours_list.push.apply(hours_list, storehours.monday)
+                hours_list.push.apply(hours_list, storehours.tuesday)
+                hours_list.push.apply(hours_list, storehours.wednesday)
+                hours_list.push.apply(hours_list, storehours.thursday)
+                hours_list.push.apply(hours_list, storehours.friday)
+                hours_list.push.apply(hours_list, storehours.saturday)
                 minhour = getMinOfArray(hours_list);
                 maxhour = getMaxOfArray(hours_list);
-                for(i=minhour; i<maxhour; i++){
-                    row = "<tr><td class='cal-item'>"+i+"</td>"
-                    if((storehours.sundaystart > i) || (storehours.sundayend < i)){
+                for(i=minhour; i<maxhour+1; i++){
+                    if(i< 12){
+                        row = "<tr><td class='cal-item'>"+i+" AM</td>"
+                    }
+                    else{
+                        j = i-12
+                        if(j==0){
+                            j=12
+                        }
+                        row = "<tr><td class='cal-item'>"+j+" PM</td>"                       
+                    }
+                    if(!(storehours.sunday.indexOf(i.toString()) >= 0)){
                         row += "<td class = 'cal-item disabled'></td>"
                     }
                     else{
                         row += "<td class = 'cal-item'></td>"
                     }
-                    if((storehours.mondaystart > i) || (storehours.mondayend < i)){
+                    if(!(storehours.monday.indexOf(i.toString()) >= 0)){
                         row += "<td class = 'cal-item disabled'></td>"
                     }
                     else{
                         row += "<td class = 'cal-item'></td>"
                     }
-                    if((storehours.tuesdaystart > i) || (storehours.tuesdayend < i)){
+                    if(!(storehours.tuesday.indexOf(i.toString()) >= 0)){
                         row += "<td class = 'cal-item disabled'></td>"
                     }
                     else{
                         row += "<td class = 'cal-item'></td>"
                     }
-                    if((storehours.wednesdaystart > i) || (storehours.wednesdayend < i)){
+                    if(!(storehours.wednesday.indexOf(i.toString()) >= 0)){
                         row += "<td class = 'cal-item disabled'></td>"
                     }
                     else{
                         row += "<td class = 'cal-item'></td>"
                     }
-                    if((storehours.thursdaystart > i) || (storehours.thursdayend < i)){
+                    if(!(storehours.thursday.indexOf(i.toString()) >= 0)){
                         row += "<td class = 'cal-item disabled'></td>"
                     }
                     else{
                         row += "<td class = 'cal-item'></td>"
                     }
-                    if((storehours.fridaystart > i) || (storehours.fridayend < i)){
+                    if(!(storehours.friday.indexOf(i.toString()) >= 0)){
                         row += "<td class = 'cal-item disabled'></td>"
                     }
                     else{
                         row += "<td class = 'cal-item'></td>"
                     }
-                    if((storehours.saturdaystart > i) || (storehours.saturdayend < i)){
+                    if(!(storehours.saturday.indexOf(i.toString()) >= 0)){
                         row += "<td class = 'cal-item disabled'></td>"
                     }
                     else{
