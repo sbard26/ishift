@@ -14,7 +14,7 @@
         <script src='https://cdn.firebase.com/js/client/2.2.1/firebase.js'></script>
     </head>
     <body>
-        <div class = "col-md-2">
+        <div class = "col-md-1">
             <div class = "container">
                 <div class = "row">
                     <div class = "logo">
@@ -25,16 +25,16 @@
             <div class = "container">
                 <div class = "row">
                     <div class="btn-group-vertical sidebar" role="group" aria-label="...">
-                        <button type="button" class="btn btn-default sidebar-item active"><b>Calendar View</b></button>
-                        <button type="button" class="btn btn-default sidebar-item"><b>Who's Working</b></button>
-                        <button type="button" class="btn btn-default sidebar-item"><b>Assign Shifts</b></button>
-                        <button type="button" class="btn btn-default sidebar-item"><b>Set Store Hours</b></button>
-                        <button type="button" class="btn btn-default sidebar-item"><b>Set Shift Times</b></button>
+                        <a class="btn btn-default sidebar-item active"><b>Calendar View</b></a>
+                        <a class="btn btn-default sidebar-item" href = "whosworking.html"><b>Who's Working</b></a>
+                        <a class="btn btn-default sidebar-item" href = "assignshifts.html"><b>Assign Shifts</b></a>
+                        <a class="btn btn-default sidebar-item" href = "setstorehours.html"><b>Set Store Hours</b></a>
+                        <a class="btn btn-default sidebar-item" href = "setshifttimes.html"><b>Set Shift Times</b></a>
                     </div>
                 </div>
             </div>
         </div>
-        <div class = "col-md-10">
+        <div class = "col-md-11">
             <div class = "container">
                 <div class = "row">
                     <div class = "welcome pull-right">
@@ -65,10 +65,6 @@
     </body>
     <script>
         $(document).ready(function(){
-            var h = window.innerHeight;
-            console.log(h);
-            console.log(h*.5);
-            $('#calendartable').css('max-height', h*.5);
             function getMaxOfArray(numArray) {
               return Math.max.apply(null, numArray);
             }
@@ -76,6 +72,7 @@
               return Math.min.apply(null, numArray);
             }
             var myFirebaseRef = new Firebase("https://amber-inferno-6999.firebaseio.com/");
+            //This is only for testing purposes
             myFirebaseRef.set({
               storehours: {
                 mondaystart: "8",
@@ -103,7 +100,50 @@
                 minhour = getMinOfArray(hours_list);
                 maxhour = getMaxOfArray(hours_list);
                 for(i=minhour; i<maxhour; i++){
-                    $('.calendartable').append("<tr><td class = 'cal-item'>"+i+"</td><td class = 'cal-item'></td><td class = 'cal-item'></td><td class = 'cal-item'></td><td class = 'cal-item'></td><td class = 'cal-item'></td><td class = 'cal-item'></td><td class = 'cal-item'></td>");
+                    row = "<tr><td class='cal-item'>"+i+"</td>"
+                    if((storehours.sundaystart > i) || (storehours.sundayend < i)){
+                        row += "<td class = 'cal-item disabled'></td>"
+                    }
+                    else{
+                        row += "<td class = 'cal-item'></td>"
+                    }
+                    if((storehours.mondaystart > i) || (storehours.mondayend < i)){
+                        row += "<td class = 'cal-item disabled'></td>"
+                    }
+                    else{
+                        row += "<td class = 'cal-item'></td>"
+                    }
+                    if((storehours.tuesdaystart > i) || (storehours.tuesdayend < i)){
+                        row += "<td class = 'cal-item disabled'></td>"
+                    }
+                    else{
+                        row += "<td class = 'cal-item'></td>"
+                    }
+                    if((storehours.wednesdaystart > i) || (storehours.wednesdayend < i)){
+                        row += "<td class = 'cal-item disabled'></td>"
+                    }
+                    else{
+                        row += "<td class = 'cal-item'></td>"
+                    }
+                    if((storehours.thursdaystart > i) || (storehours.thursdayend < i)){
+                        row += "<td class = 'cal-item disabled'></td>"
+                    }
+                    else{
+                        row += "<td class = 'cal-item'></td>"
+                    }
+                    if((storehours.fridaystart > i) || (storehours.fridayend < i)){
+                        row += "<td class = 'cal-item disabled'></td>"
+                    }
+                    else{
+                        row += "<td class = 'cal-item'></td>"
+                    }
+                    if((storehours.saturdaystart > i) || (storehours.saturdayend < i)){
+                        row += "<td class = 'cal-item disabled'></td>"
+                    }
+                    else{
+                        row += "<td class = 'cal-item'></td>"
+                    }
+                    $('.calendartable').append(row)
                 }
             });
         });

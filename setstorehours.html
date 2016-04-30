@@ -11,9 +11,10 @@
         <script src="js/jquery-1.12.3.js"></script>
         <script src="js/jquery-ui.js"></script>
         <script src="js/bootstrap.js"></script>
+        <script src='https://cdn.firebase.com/js/client/2.2.1/firebase.js'></script>
     </head>
     <body>
-        <div class = "col-md-2">
+        <div class = "col-md-1">
             <div class = "container">
                 <div class = "row">
                     <div class = "logo">
@@ -33,7 +34,7 @@
                 </div>
             </div>
         </div>
-        <div class = "col-md-10">
+        <div class = "col-md-11">
             <div class = "container">
                 <div class = "row">
                     <div class = "welcome pull-right">
@@ -42,6 +43,36 @@
                     </div>
                 </div>
             </div>
+            <div class = "container cal-container">
+                <div class = "row">
+                    <table class="table table-bordered calendar"  cellpadding="0"  cellspacing="0">
+                        <tbody class = "calendartable">
+                            <tr>
+                                <td class = "cal-item"></td>
+                                <td class = "cal-item">SUNDAY</td>
+                                <td class = "cal-item">MONDAY</td>
+                                <td class = "cal-item">TUESDAY</td>
+                                <td class = "cal-item">WEDNESDAY</td>                                
+                                <td class = "cal-item">THURSDAY</td>
+                                <td class = "cal-item">FRIDAY</td>
+                                <td class = "cal-item">SATURDAY</td>
+                            <tr>
+                        </tbody>                   
+                    </table>
+                </div>
+            </div>
         </div>
     </body>
+    <script>
+        $(document).ready(function(){
+            function getMaxOfArray(numArray) {
+              return Math.max.apply(null, numArray);
+            }
+            function getMinOfArray(numArray) {
+              return Math.min.apply(null, numArray);
+            }
+            var myFirebaseRef = new Firebase("https://amber-inferno-6999.firebaseio.com/");
+
+        });
+    </script>
 </html>

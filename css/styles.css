@@ -21,6 +21,7 @@ body {
 
 .sidebar-item {
 	height: 40px !important;
+    vertical-align: center !important;
 }
 
 .active{
@@ -31,7 +32,6 @@ body {
 .welcome {
 	position: relative;
     margin-top:25px;
-    margin-right:85px;
     font-family: 'Superclarendon-Bold', 'Superclarendon Bold', 'Superclarendon';
     font-weight: 700;
     font-style: normal;
@@ -51,16 +51,18 @@ body {
 .calendar {
   	border: 2px solid #000000 !important;
 	margin-top:25px;
-	max-width: 90% !important;
+	max-width: 100% !important;
 }
 .cal-item {
   	border: 2px solid #000000 !important;
   	width: 140px;
 	text-align: center;
 	font-weight: bold;
-	max-height: 20px !important;
 	padding:0 !important;
 	margin:0 !important;
+}
+.disabled{
+    background-color: gray !important;
 }
 .calendartable{
 	border-collapse: collapse !important;
