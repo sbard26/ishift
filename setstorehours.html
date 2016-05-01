@@ -348,10 +348,22 @@
             thursday = []
             friday = []
             saturday = []
+            sundayh = []
+            mondayh = []
+            tuesdayh = []
+            wednesdayh = []
+            thursdayh = []
+            fridayh = []
+            saturdayh = []
             for(i=0; i<elems.length;i++){
                 if($(elems[i]).attr('id').substring(0,2) == "su"){
                     if($(elems[i]).attr('id').substring(2,4) < 12){
-                        hours = $(elems[i]).attr('id').substring(2,4) + " AM"
+                        if($(elems[i]).attr('id').substring(2,4) == 0){
+                            hours = "12 AM"
+                        }
+                        else{
+                            hours = $(elems[i]).attr('id').substring(2,4) + " AM"
+                        }
                     }
                     else{
                         if($(elems[i]).attr('id').substring(2,4) == 12){
@@ -367,7 +379,12 @@
                 }
                 if($(elems[i]).attr('id').substring(0,2) == "mo"){
                     if($(elems[i]).attr('id').substring(2,4) < 12){
-                        hours = $(elems[i]).attr('id').substring(2,4) + " AM"
+                        if($(elems[i]).attr('id').substring(2,4) == 0){
+                            hours = "12 AM"
+                        }
+                        else{
+                            hours = $(elems[i]).attr('id').substring(2,4) + " AM"
+                        }
                     }
                     else{
                         if($(elems[i]).attr('id').substring(2,4) == 12){
@@ -383,7 +400,12 @@
                 }
                 if($(elems[i]).attr('id').substring(0,2) == "tu"){
                     if($(elems[i]).attr('id').substring(2,4) < 12){
-                        hours = $(elems[i]).attr('id').substring(2,4) + " AM"
+                        if($(elems[i]).attr('id').substring(2,4) == 0){
+                            hours = "12 AM"
+                        }
+                        else{
+                            hours = $(elems[i]).attr('id').substring(2,4) + " AM"
+                        }
                     }
                     else{
                         if($(elems[i]).attr('id').substring(2,4) == 12){
@@ -399,7 +421,12 @@
                 }
                 if($(elems[i]).attr('id').substring(0,2) == "we"){
                     if($(elems[i]).attr('id').substring(2,4) < 12){
-                        hours = $(elems[i]).attr('id').substring(2,4) + " AM"
+                        if($(elems[i]).attr('id').substring(2,4) == 0){
+                            hours = "12 AM"
+                        }
+                        else{
+                            hours = $(elems[i]).attr('id').substring(2,4) + " AM"
+                        }
                     }
                     else{
                         if($(elems[i]).attr('id').substring(2,4) == 12){
@@ -415,7 +442,12 @@
                 }
                 if($(elems[i]).attr('id').substring(0,2) == "th"){
                     if($(elems[i]).attr('id').substring(2,4) < 12){
-                        hours = $(elems[i]).attr('id').substring(2,4) + " AM"
+                        if($(elems[i]).attr('id').substring(2,4) == 0){
+                            hours = "12 AM"
+                        }
+                        else{
+                            hours = $(elems[i]).attr('id').substring(2,4) + " AM"
+                        }
                     }
                     else{
                         if($(elems[i]).attr('id').substring(2,4) == 12){
@@ -431,7 +463,12 @@
                 }
                 if($(elems[i]).attr('id').substring(0,2) == "fr"){
                     if($(elems[i]).attr('id').substring(2,4) < 12){
-                        hours = $(elems[i]).attr('id').substring(2,4) + " AM"
+                        if($(elems[i]).attr('id').substring(2,4) == 0){
+                            hours = "12 AM"
+                        }
+                        else{
+                            hours = $(elems[i]).attr('id').substring(2,4) + " AM"
+                        }
                     }
                     else{
                         if($(elems[i]).attr('id').substring(2,4) == 12){
@@ -447,7 +484,12 @@
                 }
                 if($(elems[i]).attr('id').substring(0,2) == "sa"){
                     if($(elems[i]).attr('id').substring(2,4) < 12){
-                        hours = $(elems[i]).attr('id').substring(2,4) + " AM"
+                        if($(elems[i]).attr('id').substring(2,4) == 0){
+                            hours = "12 AM"
+                        }
+                        else{
+                            hours = $(elems[i]).attr('id').substring(2,4) + " AM"
+                        }
                     }
                     else{
                         if($(elems[i]).attr('id').substring(2,4) == 12){
@@ -462,6 +504,7 @@
                     saturday.push(" " + hours);                
                 }
             }
+            $('#hourslist').empty();
             $('#hourslist').append("<li><b>Sunday: </b>" + sunday + "</li><hr>");
             $('#hourslist').append("<li><b>Monday: </b>" + monday + "</li><hr>");
             $('#hourslist').append("<li><b>Tuesday: </b>" + tuesday + "</li><hr>");
