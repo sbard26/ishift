@@ -43,22 +43,24 @@
                     </div>
                 </div>
             </div>
-            <div class = "container cal-container">
+            <div class = "container">
                 <div class = "row">
-                    <table class="table table-bordered calendar"  cellpadding="0"  cellspacing="0">
-                        <tbody class = "calendartable">
-                            <tr>
-                                <td class = "cal-item"></td>
-                                <td class = "cal-item">SUNDAY</td>
-                                <td class = "cal-item">MONDAY</td>
-                                <td class = "cal-item">TUESDAY</td>
-                                <td class = "cal-item">WEDNESDAY</td>                                
-                                <td class = "cal-item">THURSDAY</td>
-                                <td class = "cal-item">FRIDAY</td>
-                                <td class = "cal-item">SATURDAY</td>
-                            <tr>
-                        </tbody>                   
-                    </table>
+                    <div id = "cal-wrapper" class = "table-responsive">
+                        <table class="table table-bordered">
+                            <tbody id ="cal-table">
+                                <tr>
+                                    <td class = "cal-item"></td>
+                                    <td class = "cal-item">SUNDAY</td>
+                                    <td class = "cal-item">MONDAY</td>
+                                    <td class = "cal-item">TUESDAY</td>
+                                    <td class = "cal-item">WEDNESDAY</td>                                
+                                    <td class = "cal-item">THURSDAY</td>
+                                    <td class = "cal-item">FRIDAY</td>
+                                    <td class = "cal-item">SATURDAY</td>
+                                </tr>
+                            </tbody>                   
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
@@ -149,7 +151,7 @@
                     else{
                         row += "<td class = 'cal-item'></td>"
                     }
-                    $('.calendartable').append(row)
+                    $('#cal-table').append(row + "</tr>")
                 }
             });
         });
