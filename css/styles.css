@@ -68,3 +68,140 @@ body {
 .calendartable{
 	border-collapse: collapse !important;
 }
+
+.current-workers-container {
+    /*background-color: lightgrey;*/
+    width: 50%;
+    height: 50%;
+    border: 2px solid black;
+    margin: auto;
+    position: absolute;
+    top: 0; left: 0; bottom: 0; right: 0;
+}
+
+.current-workers-title {
+    text-align: center;
+    text-decoration: underline;
+    font-family: 'Superclarendon-Bold', 'Superclarendon Bold', 'Superclarendon';
+    font-size: 24pt;
+    font-style: normal;
+}
+.current-workers-employee-col {
+    float:left;
+    width:33%;
+    text-align: center;
+    font-size: 16pt;
+    font-family: 'Superclarendon-Bold', 'Superclarendon Bold', 'Superclarendon';
+}
+
+.current-workers-shift-col {
+    text-align: center;
+    display: inline-block;
+    width: 33%;
+    font-size: 16pt;
+    font-family: 'Superclarendon-Bold', 'Superclarendon Bold', 'Superclarendon';
+}
+
+.current-workers-checked-in-col {
+    text-align: center;
+    float:right;
+    width:33%;
+    font-size: 16pt;
+    font-family: 'Superclarendon-Bold', 'Superclarendon Bold', 'Superclarendon';
+}
+
+.current-shifts-time {
+    text-align: center;
+    font-family: 'Superclarendon-Bold', 'Superclarendon Bold', 'Superclarendon';
+    font-size: 12pt;
+    font-style: normal;
+}
+
+.not-checked-in-button {
+    font-size: 16pt;
+    vertical-align: middle !important;
+}
+
+.back-button {
+    height: 50px;
+    width: 150px;
+    font-size: 16pt;
+    vertical-align: middle !important;
+    margin: 2px;
+}
+
+.employee-info-container {
+    /*text-align: left;
+    font-size: 16pt;
+    margin: auto;
+    left: 0; right: 0;
+    font-family: 'Superclarendon-Bold', 'Superclarendon Bold', 'Superclarendon';*/
+} 
+
+.employee-info-container p{
+    /*padding-left: 1em;*/
+    text-align: center;
+    font-size: 16pt;
+    font-family: 'Superclarendon-Bold', 'Superclarendon Bold', 'Superclarendon';
+}
+
+.contact-via-email-button {
+    /*text-align: center;*/
+    display: inline-block;
+    height: 50px;
+    width: 215px;
+    font-size: 16pt;
+    vertical-align: middle !important;
+
+    margin: auto;
+    position: absolute;
+    left: 0; right: 0;
+}
+
+.email-to-title {
+    text-align: center;
+    font-family: 'Superclarendon-Bold', 'Superclarendon Bold', 'Superclarendon';
+    font-size: 24pt;
+    font-style: normal;
+}
+
+.subject-text {
+    width: 300px;
+    margin: auto;
+    position: absolute;
+    left: 0; right: 0;
+}
+
+.body-text {
+    width: 300px;
+    height: 200px;
+    margin: auto;
+    position: absolute;
+    left: 0; right: 0;
+}
+
+.body-text-container {
+    padding-top: 30px;
+}
+
+.send-cancel-buttons-container {
+    display: inline-block;
+    margin: auto;
+    position: absolute;
+    left: 0; right: 0; bottom: 15%;
+}
+
+.send-button {
+    display: inline-block;
+    margin-left: 40px;
+
+}
+
+.cancel-button {
+    display: inline-block;
+    margin-right: 40px;
+}
+
+input {
+    display: block;
+}

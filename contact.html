@@ -25,10 +25,10 @@
                 <div class = "row">
                     <div class="btn-group-vertical sidebar" role="group" aria-label="...">
                         <a class="btn btn-default sidebar-item" href = "index.html"><b>Calendar View</b></a>
-                        <a class="btn btn-default sidebar-item" href = "whosworking.html"><b>Who's Working</b></a>
+                        <a class="btn btn-default sidebar-item active" href = "whosworking.html"><b>Who's Working</b></a>
                         <a class="btn btn-default sidebar-item" href = "assignshifts.html"><b>Assign Shifts</b></a>
                         <a class="btn btn-default sidebar-item" href = "setstorehours.html"><b>Set Store Hours</b></a>
-                        <a class="btn btn-default sidebar-item active" href = "setshifttimes.html"><b>Set Shift Times</b></a>
+                        <a class="btn btn-default sidebar-item" href = "setshifttimes.html"><b>Set Shift Times</b></a>
                     </div>
                 </div>
             </div>
@@ -41,6 +41,21 @@
                         <p class = "time">The current time is: 10:22 AM</p>
                     </div>
                 </div>
+            </div>
+        </div>
+        <div class = "current-workers-container">
+            <a class="btn btn-default back-button" href="employeeinfo.html"><b>Back</b></a>
+            <p class = "email-to-title"> Email to Spencer Bard
+            </p>
+            <div data-label="subject">
+                <input class="subject-text" type="text" placeholder="Subject"/>
+            </div>
+            <div class="body-text-container" data-label="body">
+                <textarea class="body-text" type="text" placeholder="Body" onclick=""></textarea>
+            </div>
+            <div class="send-cancel-buttons-container text-center"> 
+                <a class="btn btn-default cancel-button" href="employeeinfo.html"><b>Cancel</b></a>
+                <a class="btn btn-default send-button" id="send-email" href="whosworking.html"><b>Send</b></a>
             </div>
         </div>
     </body>

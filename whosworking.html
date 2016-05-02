@@ -24,11 +24,11 @@
             <div class = "container">
                 <div class = "row">
                     <div class="btn-group-vertical sidebar" role="group" aria-label="...">
-                        <button type="button" class="btn btn-default sidebar-item active"><b>Calendar View</b></button>
-                        <button type="button" class="btn btn-default sidebar-item"><b>Who's Working</b></button>
-                        <button type="button" class="btn btn-default sidebar-item"><b>Assign Shifts</b></button>
-                        <button type="button" class="btn btn-default sidebar-item"><b>Set Store Hours</b></button>
-                        <button type="button" class="btn btn-default sidebar-item"><b>Set Shift Times</b></button>
+                        <a class="btn btn-default sidebar-item" href = "index.html"><b>Calendar View</b></a>
+                        <a class="btn btn-default sidebar-item active" href = "whosworking.html"><b>Who's Working</b></a>
+                        <a class="btn btn-default sidebar-item" href = "assignshifts.html"><b>Assign Shifts</b></a>
+                        <a class="btn btn-default sidebar-item" href = "setstorehours.html"><b>Set Store Hours</b></a>
+                        <a class="btn btn-default sidebar-item" href = "setshifttimes.html"><b>Set Shift Times</b></a>
                     </div>
                 </div>
             </div>
@@ -42,6 +42,29 @@
                     </div>
                 </div>
             </div>
+        </div>
+        <div class = "current-workers-container">
+            <p class = "current-workers-title"> Current Shifts
+            </p>
+            <div class ="current-workers-employee-col">
+            <p style="padding-top: 20%;">Ryan F.</p>
+            <div style="padding-top: 10%;">
+            <a class="btn btn-default not-checked-in-button" href="employeeinfo.html" style="color:red; font-weight:bold"><b>Spencer B.</b></a>
+            </div>
+            <p style="padding-top: 10%;">Tom B.</p>
+            </div>
+            <div class ="current-workers-shift-col">
+            <p style="padding-top: 20%;">9:00am - 3:00pm</p>
+            <p style="padding-top: 10%;">10:00am - 4:00pm</p>
+            <p style="padding-top: 10%;">10:00am - 4:00pm</p>
+            </div>
+            <div class ="current-workers-checked-in-col">
+            <p style="padding-top: 20%;">Checked-In: 8:45am</p>
+            <p style="padding-top: 10%; color:red; font-weight:bold;">Not Checked In</p>
+            <p style="padding-top: 10%;">Checked-In: 9:50am</p>
+            </div>
+            <p class = "current-shifts-time" style="padding-top: 15%;"> Current Time: 10:22 AM
+            </p>
         </div>
     </body>
 </html>
