@@ -512,6 +512,7 @@
                 }
             }
             $('#hourslist').empty();
+            $('#repeatboxes').empty();
             count = 0
             day = ''
             days_of_the_week = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
@@ -579,16 +580,19 @@
                 }
                 else{
                     $('#myModal').modal('hide');
-                    myFirebaseRef.update({ storehours: 
-                        {
-                            sunday: sundayh,
-                            monday: mondayh,
-                            tuesday: tuesdayh,
-                            wednesday: wednesdayh,
-                            thursday: thursdayh,
-                            friday: fridayh,
-                            saturday: saturdayh
-                        } 
+                    myFirebaseRef.on("value", function(snapshot) {
+                        storehours = snapshot.val().storehours;
+                        myFirebaseRef.update({ shifttimes: 
+                            {
+                                sunday: sundayh,
+                                monday: mondayh,
+                                tuesday: tuesdayh,
+                                wednesday: wednesdayh,
+                                thursday: thursdayh,
+                                friday: fridayh,
+                                saturday: saturdayh
+                            } 
+                        });
                     });
                 }
             }
