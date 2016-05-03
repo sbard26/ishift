@@ -49,12 +49,23 @@ body {
     font-size: 12px;
     color: #000;
 }
+
+.left {
+    height: 10px;
+    width: 10px;
+}
+
+.week {
+    font-family: 'Superclarendon-Bold', 'Superclarendon Bold', 'Superclarendon';
+    font-size: 16px;
+}
+
 .calendar {
   	border: 2px solid #000000 !important;
 	margin-top:25px;
 	max-width: 100% !important;
 }
-.cal-item {
+.cal-item-clickable {
   	border: 2px solid #000000 !important;
     background-color: #CC0033;
   	width: 140px;
@@ -62,6 +73,17 @@ body {
 	font-weight: bold;
 	padding:0 !important;
 	margin:0 !important;
+    cursor: pointer;
+}
+
+.cal-item-unclickable {
+    border: 2px solid #000000 !important;
+    background-color: #CC0033;
+    width: 140px;
+    text-align: center;
+    font-weight: bold;
+    padding:0 !important;
+    margin:0 !important;
 }
 
 .cal-item-white {

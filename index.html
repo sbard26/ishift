@@ -45,6 +45,13 @@
             </div>
             <div class = "container">
                 <div class = "row">
+                    <!-- <button type="button" class="btn btn-default">
+                        <span></span>
+                    </button> -->
+                    <p class = "week">Week of March 27 - April 2</p>
+                    <!-- <button type="button" class="btn btn-default">
+                        <span></span>
+                    </button> -->
                     <div id = "cal-wrapper" class = "table-responsive">
                         <table class="table table-bordered">
                             <tbody id ="cal-table">
@@ -131,80 +138,80 @@
                         row = "<tr><td class='cal-item-white'>"+j+" PM</td>"                       
                     }
                     if(typeof storehours.sunday == 'undefined'){
-                        row += "<td class = 'cal-item disabled'></td>"
+                        row += "<td class = 'cal-item-unclickable disabled'></td>"
                     }
                     else{
                         if(!(storehours.sunday.indexOf(i.toString()) >= 0)){
-                            row += "<td class = 'cal-item disabled'></td>"
+                            row += "<td class = 'cal-item-unclickable disabled'></td>"
                         }
                         else{
-                            row += "<td class = 'cal-item'></td>"
+                            row += "<td class = 'cal-item-unclickable'></td>"
                         }
                     }
                     if(typeof storehours.monday == 'undefined'){
-                        row += "<td class = 'cal-item disabled'></td>"
+                        row += "<td class = 'cal-item-unclickable disabled'></td>"
                     }
                     else{
                         if(!(storehours.monday.indexOf(i.toString()) >= 0)){
                             row += "<td class = 'cal-item disabled'></td>"
                         }
                         else{
-                            row += "<td class = 'cal-item'></td>"
+                            row += "<td class = 'cal-item-unclickable'></td>"
                         }
                     }
                     if(typeof storehours.tuesday == 'undefined'){
-                        row += "<td class = 'cal-item disabled'></td>"
+                        row += "<td class = 'cal-item-unclickable disabled'></td>"
                     }
                     else{
                         if(!(storehours.tuesday.indexOf(i.toString()) >= 0)){
-                            row += "<td class = 'cal-item disabled'></td>"
+                            row += "<td class = 'cal-item-unclickable disabled'></td>"
                         }
                         else{
-                            row += "<td class = 'cal-item'></td>"
+                            row += "<td class = 'cal-item-unclickable'></td>"
                         }
                     }
                     if(typeof storehours.wednesday == 'undefined'){
-                        row += "<td class = 'cal-item disabled'></td>"
+                        row += "<td class = 'cal-item-unclickable disabled'></td>"
                     }
                     else{
                         if(!(storehours.wednesday.indexOf(i.toString()) >= 0)){
-                            row += "<td class = 'cal-item disabled'></td>"
+                            row += "<td class = 'cal-item-unclickable disabled'></td>"
                         }
                         else{
-                            row += "<td class = 'cal-item'></td>"
+                            row += "<td class = 'cal-item-unclickable'></td>"
                         }
                     }                 
                     if(typeof storehours.thursday == 'undefined'){
-                        row += "<td class = 'cal-item disabled'></td>"
+                        row += "<td class = 'cal-item-unclickable disabled'></td>"
                     }
                     else{
                         if(!(storehours.thursday.indexOf(i.toString()) >= 0)){
-                            row += "<td class = 'cal-item disabled'></td>"
+                            row += "<td class = 'cal-item-unclickable disabled'></td>"
                         }
                         else{
-                            row += "<td class = 'cal-item'></td>"
+                            row += "<td class = 'cal-item-unclickable'></td>"
                         }
                     }                     
                     if(typeof storehours.friday == 'undefined'){
-                        row += "<td class = 'cal-item disabled'></td>"
+                        row += "<td class = 'cal-item-unclickable disabled'></td>"
                     }
                     else{
                         if(!(storehours.friday.indexOf(i.toString()) >= 0)){
-                            row += "<td class = 'cal-item disabled'></td>"
+                            row += "<td class = 'cal-item-unclickable disabled'></td>"
                         }
                         else{
-                            row += "<td class = 'cal-item'></td>"
+                            row += "<td class = 'cal-item-unclickable'></td>"
                         }
                     }                 
                     if(typeof storehours.saturday == 'undefined'){
-                        row += "<td class = 'cal-item disabled'></td>"
+                        row += "<td class = 'cal-item-unclickable disabled'></td>"
                     }
                     else{
                         if(!(storehours.saturday.indexOf(i.toString()) >= 0)){
-                            row += "<td class = 'cal-item disabled'></td>"
+                            row += "<td class = 'cal-item-unclickable disabled'></td>"
                         }
                         else{
-                            row += "<td class = 'cal-item'></td>"
+                            row += "<td class = 'cal-item-unclickable'></td>"
                         }
                     }                 
                     $('#cal-table').append(row + "</tr>")
