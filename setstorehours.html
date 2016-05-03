@@ -333,6 +333,7 @@
         thursdayh = []
         fridayh = []
         saturdayh = []
+        var myFirebaseRef = new Firebase("https://amber-inferno-6999.firebaseio.com/");
         function submitHours(){
             tds = $(".cal-item");
             elems = []
@@ -514,7 +515,44 @@
             $('#hourslist').append("<li><b>Saturday: </b>" + saturday + "</li>");
             $('#myModal').modal('show');
         }
+        function setcal(){
+            myFirebaseRef.on("value", function(snapshot) {
+                storehours = snapshot.val().storehours;
+                hours_list = []
+                hours_list.push.apply(hours_list, storehours.sunday)
+                hours_list.push.apply(hours_list, storehours.monday)
+                hours_list.push.apply(hours_list, storehours.tuesday)
+                hours_list.push.apply(hours_list, storehours.wednesday)
+                hours_list.push.apply(hours_list, storehours.thursday)
+                hours_list.push.apply(hours_list, storehours.friday)
+                hours_list.push.apply(hours_list, storehours.saturday)
+                for(i=0; i<24; i++){
+                    if(storehours.sunday.indexOf(i.toString()) >= 0){
+                        $('#su'+i).removeClass('disabled');
+                    }
+                    if(storehours.monday.indexOf(i.toString()) >= 0){
+                        $('#mo'+i).removeClass('disabled');
+                    }
+                    if(storehours.tuesday.indexOf(i.toString()) >= 0){
+                        $('#tu'+i).removeClass('disabled');
+                    }
+                    if(storehours.wednesday.indexOf(i.toString()) >= 0){
+                        $('#we'+i).removeClass('disabled');
+                    }
+                    if(storehours.thursday.indexOf(i.toString()) >= 0){
+                        $('#th'+i).removeClass('disabled');
+                    }
+                    if(storehours.friday.indexOf(i.toString()) >= 0){
+                        $('#fr'+i).removeClass('disabled');
+                    }
+                    if(storehours.saturday.indexOf(i.toString()) >= 0){
+                        $('#sa'+i).removeClass('disabled');
+                    }
+                }
+            });
+        }
         $(document).ready(function(){
+            setcal();
             document.getElementById("submithours").addEventListener ("click", submitHours, false);
             document.getElementById("savehours").addEventListener ("click", saveHours, false);
             function getMaxOfArray(numArray) {
@@ -523,7 +561,6 @@
             function getMinOfArray(numArray) {
               return Math.min.apply(null, numArray);
             }
-            var myFirebaseRef = new Firebase("https://amber-inferno-6999.firebaseio.com/");
             function saveHours(){
                 $('#myModal').modal('hide');
                 myFirebaseRef.update({ storehours: 
