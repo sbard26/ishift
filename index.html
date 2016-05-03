@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Home</title>
+        <title>Home - iShift</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
         <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
         <meta name="apple-mobile-web-app-capable" content="yes"/>
@@ -64,9 +64,21 @@
                 </div>
             </div>
         </div>
+        <div class = "notification-container" id="notifications">
+            <a class="btn btn-default x-button" id="xbutton" onlick="xbuttonclick()"><b>x</b></a>
+            <p style = "color:#CC0033; font-weight:bold; font-size:13pt; margin:3px; float:left">DROPPED SHIFT</p>
+            <p style = "font-weight:bold; font-size:13pt; margin:3px"> - Sara dropped her shift on 4/29 from 9:00am - 3:00pm</p>
+            <a class="btn btn-default reassign-button" href = "reassignshift.html"><b>Reassign</b></a>
+            <a class="btn btn-default contact-Sara-button" href = "employeeinfo-sara.html"><b>Contact Sara</b></a>
+        </div>
     </body>
     <script>
         $(document).ready(function(){
+            $('#xbutton').click(function() {
+                $('#notifications').empty();
+                $('#notifications').append("<p style = 'color:#CC0033; font-weight:bold; font-size:13pt; margin:3px; float:left'>No notifications!</p>");
+            });
+
             function getMaxOfArray(numArray) {
               return Math.max.apply(null, numArray);
             }

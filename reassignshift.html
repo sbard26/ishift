@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>iShift</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+        <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+        <meta name="apple-mobile-web-app-capable" content="yes"/>
+        <link href="css/bootstrap.css" type="text/css" rel="stylesheet"/>
+        <link href="css/jquery-ui.css" type="text/css" rel="stylesheet"/>
+        <link href="css/styles.css" type="text/css" rel="stylesheet"/>
+        <script src="js/jquery-1.12.3.js"></script>
+        <script src="js/jquery-ui.js"></script>
+        <script src="js/bootstrap.js"></script>
+        <script src='https://cdn.firebase.com/js/client/2.2.1/firebase.js'></script>
+    </head>
+    <body>
+        <div class = "col-md-1">
+            <div class = "container">
+                <div class = "row">
+                    <div class = "logo">
+                        <p>iShift</p>
+                    </div>
+                </div>
+            </div>
+            <div class = "container">
+                <div class = "row">
+                    <div class="btn-group-vertical sidebar" role="group" aria-label="...">
+                        <a class="btn btn-default sidebar-item" href = "index.html"><b>Calendar View</b></a>
+                        <a class="btn btn-default sidebar-item" href = "whosworking.html"><b>Who's Working</b></a>
+                        <a class="btn btn-default sidebar-item" href = "assignshifts.html"><b>Assign Shifts</b></a>
+                        <a class="btn btn-default sidebar-item" href = "setstorehours.html"><b>Set Store Hours</b></a>
+                        <a class="btn btn-default sidebar-item active" href = "setshifttimes.html"><b>Set Shift Times</b></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class = "col-md-11">
+            <div class = "container">
+                <div class = "row">
+                    <div class = "welcome pull-right">
+                        <p>Welcome, Sam!</p>
+                        <p class = "time">The current time is: 10:22 AM</p>
+                    </div>
+                </div>
+            </div>
+            <div class = "container cal-container">
+                <div class = "row">
+                    <table class="table table-bordered calendar"  cellpadding="0"  cellspacing="0" id="calendar">
+                        <tbody class = "calendartable">
+                            <tr>
+                                <td class = "cal-item tlabel">Available Workers</td>
+                                <td class = "cal-item tlabel">9:00am</td>
+                                <td class = "cal-item tlabel">10:00am</td>
+                                <td class = "cal-item tlabel">11:00am</td>
+                                <td class = "cal-item tlabel">12:00pm</td>                                
+                                <td class = "cal-item tlabel">1:00pm</td>
+                                <td class = "cal-item tlabel">2:00pm</td>
+                            </tr>
+                            <tr id = "0">
+                                <td class = "cal-item tlabel">John B.</td>
+                                <td class = "cal-item disabled" id = "su0"></td>
+                                <td class = "cal-item disabled" id = "mo0"></td>
+                                <td class = "cal-item disabled" id = "tu0"></td>
+                                <td class = "cal-item disabled" id = "we0"></td>                                
+                                <td class = "cal-item disabled" id = "th0"></td>
+                                <td class = "cal-item disabled" id = "fr0"></td>
+                            </tr>
+                            <tr id = "1">
+                                <td class = "cal-item tlabel">Spencer B.</td>
+                                <td class = "cal-item disabled" id = "su1"></td>
+                                <td class = "cal-item disabled" id = "mo1"></td>
+                                <td class = "cal-item disabled" id = "tu1"></td>
+                                <td class = "cal-item disabled" id = "we1"></td>                                
+                                <td class = "cal-item disabled" id = "th1"></td>
+                                <td class = "cal-item disabled" id = "fr1"></td>
+                            </tr>
+                            <tr id = "2">
+                                <td class = "cal-item tlabel">Bob D.</td>
+                                <td class = "cal-item disabled" id = "su2"></td>
+                                <td class = "cal-item disabled" id = "mo2"></td>
+                                <td class = "cal-item disabled" id = "tu2"></td>
+                                <td class = "cal-item disabled" id = "we2"></td>                                
+                                <td class = "cal-item disabled" id = "th2"></td>
+                                <td class = "cal-item disabled" id = "fr2"></td>
+                            </tr>
+                            <tr id = "3">
+                                <td class = "cal-item tlabel">Bill R.</td>
+                                <td class = "cal-item disabled" id = "su3"></td>
+                                <td class = "cal-item disabled" id = "mo3"></td>
+                                <td class = "cal-item disabled" id = "tu3"></td>
+                                <td class = "cal-item disabled" id = "we3"></td>                                
+                                <td class = "cal-item disabled" id = "th3"></td>
+                                <td class = "cal-item disabled" id = "fr3"></td>
+                            <tr>
+                            <tr id = "4">
+                                <td class = "cal-item tlabel">Sam F.</td>
+                                <td class = "cal-item disabled" id = "su4"></td>
+                                <td class = "cal-item disabled" id = "mo4"></td>
+                                <td class = "cal-item disabled" id = "tu4"></td>
+                                <td class = "cal-item disabled" id = "we4"></td>                                
+                                <td class = "cal-item disabled" id = "th4"></td>
+                                <td class = "cal-item disabled" id = "fr4"></td>
+                            </tr>  
+                            <tr id = "5">
+                                <td class = "cal-item tlabel">Fred G.</td>
+                                <td class = "cal-item disabled" id = "su5"></td>
+                                <td class = "cal-item disabled" id = "mo5"></td>
+                                <td class = "cal-item disabled" id = "tu5"></td>
+                                <td class = "cal-item disabled" id = "we5"></td>                                
+                                <td class = "cal-item disabled" id = "th5"></td>
+                                <td class = "cal-item disabled" id = "fr5"></td>
+                            </tr>
+                            <tr id = "6">
+                                <td class = "cal-item tlabel">Jacob T.</td>
+                                <td class = "cal-item disabled" id = "su6"></td>
+                                <td class = "cal-item disabled" id = "mo6"></td>
+                                <td class = "cal-item disabled" id = "tu6"></td>
+                                <td class = "cal-item disabled" id = "we6"></td>                                
+                                <td class = "cal-item disabled" id = "th6"></td>
+                                <td class = "cal-item disabled" id = "fr6"></td>
+                            </tr>
+                            <tr id = "7">
+                                <td class = "cal-item tlabel">Nate R.</td>
+                                <td class = "cal-item disabled" id = "su7"></td>
+                                <td class = "cal-item disabled" id = "mo7"></td>
+                                <td class = "cal-item disabled" id = "tu7"></td>
+                                <td class = "cal-item disabled" id = "we7"></td>                                
+                                <td class = "cal-item disabled" id = "th7"></td>
+                                <td class = "cal-item disabled" id = "fr7"></td>
+                            </tr>
+                            <tr id = "8">
+                                <td class = "cal-item tlabel">Dan M.</td>
+                                <td class = "cal-item disabled" id = "su8"></td>
+                                <td class = "cal-item disabled" id = "mo8"></td>
+                                <td class = "cal-item disabled" id = "tu8"></td>
+                                <td class = "cal-item disabled" id = "we8"></td>                                
+                                <td class = "cal-item disabled" id = "th8"></td>
+                                <td class = "cal-item disabled" id = "fr8"></td>
+                            </tr>
+                        </tbody>                   
+                    </table>
+                    <p>Click and drag to select workers to assign to shift. Employee(s) will receive an email asking to confirm this change.</p>
+                    <div class = "pull-right">
+                        <a type="button" class="btn btn-default btn-lg" style="background-color:#CC0033;color:#fff" href = "index.html">Submit</a>
+                    </div>
+                    <div class = "pull-left">
+                        <a type="button" class="btn btn-default btn-lg" style="background-color:#CC0033;color:#fff" href = "index.html">Cancel</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+    <script>
+        $(document).ready(function(){
+            var isMouseDown = false;
+            $("#calendar td")
+                .mousedown(function () {
+                    if(!($(this).attr('class').indexOf("tlabel") >= 0)){
+                        isMouseDown = true;
+                        $(this).toggleClass("disabled");
+                        return false; // prevent text selection
+                    }
+                })
+                .mouseover(function () {
+                    if (isMouseDown) {
+                        if(!($(this).attr('class').indexOf("tlabel") >= 0)){
+                            $(this).toggleClass("disabled");
+                        }
+                    }
+                })
+                .bind("selectstart", function () {
+                    if(!($(this).attr('class').indexOf("tlabel") >= 0)){
+                        return false; // prevent text selection in IE
+                    }
+                });
+                $(document).mouseup(function () {
+                    // if(!($(this).attr('class').indexOf("tlabel") >= 0)){
+                        isMouseDown = false;
+                    // }
+                });
+            });
+    </script>
+</html>

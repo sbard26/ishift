@@ -208,3 +208,28 @@ body {
 input {
     display: block;
 }
+
+.notification-container {
+    /*background-color: lightgrey;*/
+    width: 50%;
+    height: 10%;
+    border: 2px solid black;
+    margin: auto;
+    position: absolute;
+    left: 0; bottom: 30%; right: 0;
+}
+
+.x-button {
+    float: right;
+    margin: 3px;
+}
+
+.reassign-button {
+    float: left;
+    margin: 3px;
+}
+
+.contact-Sara-button {
+    display: inline-block;
+    margin: 3px;
+}
