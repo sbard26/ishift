@@ -75,6 +75,9 @@ body {
 .disabled{
     background-color: gray !important;
 }
+.extra-disabled{
+    background-color: black !important
+}
 .calendartable{
 	border-collapse: collapse !important;
 }

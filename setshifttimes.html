@@ -43,11 +43,11 @@
                     </div>
                 </div>
             </div>
-            <div class = "container cal-container">
+            <div class = "container cal-container" style="display:none;">
                 <div class = "row">
                     <table class="table table-bordered calendar"  cellpadding="0"  cellspacing="0" id="calendar">
                         <tbody class = "calendartable">
-                            <tr>
+                            <tr id = "labels">
                                 <td class = "cal-item-white tlabel"></td>
                                 <td class = "cal-item-white tlabel">SUNDAY</td>
                                 <td class = "cal-item-white tlabel">MONDAY</td>
@@ -340,6 +340,13 @@
         thursdayh = []
         fridayh = []
         saturdayh = []
+        var myFirebaseRef = new Firebase("https://amber-inferno-6999.firebaseio.com/");
+        function getMaxOfArray(numArray) {
+          return Math.max.apply(null, numArray);
+        }
+        function getMinOfArray(numArray) {
+          return Math.min.apply(null, numArray);
+        }
         function submitHours(){
             tds = $(".cal-item");
             elems = []
@@ -564,7 +571,60 @@
                 $('#myModal').modal('show');
             }
         }
+        function setcal(){
+            myFirebaseRef.on("value", function(snapshot) {
+                storehours = snapshot.val().storehours;
+                hours_list = []
+                hours_list.push.apply(hours_list, storehours.sunday)
+                hours_list.push.apply(hours_list, storehours.monday)
+                hours_list.push.apply(hours_list, storehours.tuesday)
+                hours_list.push.apply(hours_list, storehours.wednesday)
+                hours_list.push.apply(hours_list, storehours.thursday)
+                hours_list.push.apply(hours_list, storehours.friday)
+                hours_list.push.apply(hours_list, storehours.saturday)
+                minhour = getMinOfArray(hours_list);
+                maxhour = getMaxOfArray(hours_list);
+                hours_range = []
+                for (i=0; i<24; i++){
+                    if((i<minhour) || (i>maxhour)){
+                        $('#'+i).remove();
+                    }
+                }
+                for(i=minhour; i<maxhour+1; i++){
+                    if(!(storehours.sunday.indexOf(i.toString()) >= 0)){
+                        $('#su' + i).removeClass('disabled');
+                        $('#su' + i).addClass('extra-disabled');
+                    }
+                    if(!(storehours.monday.indexOf(i.toString()) >= 0)){
+                        $('#mo' + i).removeClass('disabled');
+                        $('#mo' + i).addClass('extra-disabled');                    
+                    }
+                    if(!(storehours.tuesday.indexOf(i.toString()) >= 0)){
+                        $('#tu' + i).removeClass('disabled');
+                        $('#tu' + i).addClass('extra-disabled');
+                    }
+                    if(!(storehours.wednesday.indexOf(i.toString()) >= 0)){
+                        $('#we' + i).removeClass('disabled');
+                        $('#we' + i).addClass('extra-disabled');
+                    }
+                    if(!(storehours.thursday.indexOf(i.toString()) >= 0)){
+                        $('#th' + i).removeClass('disabled');
+                        $('#th' + i).addClass('extra-disabled');
+                    }
+                    if(!(storehours.friday.indexOf(i.toString()) >= 0)){
+                        $('#fr' + i).removeClass('disabled');
+                        $('#fr' + i).addClass('extra-disabled');
+                    }
+                    if(!(storehours.saturday.indexOf(i.toString()) >= 0)){
+                        $('#sa' + i).removeClass('disabled');
+                        $('#sa' + i).addClass('extra-disabled');
+                    }
+                }
+                $('.cal-container').css('display', '');
+            });
+        }
         $(document).ready(function(){
+            setcal();
             document.getElementById("submithours").addEventListener ("click", submitHours, false);
             document.getElementById("savehours").addEventListener ("click", saveHours, false);
             function getMaxOfArray(numArray) {
@@ -573,7 +633,6 @@
             function getMinOfArray(numArray) {
               return Math.min.apply(null, numArray);
             }
-            var myFirebaseRef = new Firebase("https://amber-inferno-6999.firebaseio.com/");
             function saveHours(){
                 if((isNaN($('#numemployees').val())) || ($('#numemployees').val() == '')){
                     alert('Please input a number for the number of required employees')
@@ -581,7 +640,7 @@
                 else{
                     $('#myModal').modal('hide');
                     myFirebaseRef.on("value", function(snapshot) {
-                        storehours = snapshot.val().storehours;
+                        shifttimes = snapshot.val().shifttimes;
                         myFirebaseRef.update({ shifttimes: 
                             {
                                 sunday: sundayh,
@@ -599,7 +658,7 @@
             var isMouseDown = false;
             $("#calendar td")
                 .mousedown(function () {
-                    if(!($(this).attr('class').indexOf("tlabel") >= 0)){
+                    if(!($(this).attr('class').indexOf("tlabel") >= 0) || !($(this).attr('class').indexOf("extra-disabled") >= 0)){
                         isMouseDown = true;
                         $(this).toggleClass("disabled");
                         return false; // prevent text selection
@@ -607,13 +666,13 @@
                 })
                 .mouseover(function () {
                     if (isMouseDown) {
-                        if(!($(this).attr('class').indexOf("tlabel") >= 0)){
+                        if(!($(this).attr('class').indexOf("tlabel") >= 0) || !($(this).attr('class').indexOf("extra-disabled") >= 0)){
                             $(this).toggleClass("disabled");
                         }
                     }
                 })
                 .bind("selectstart", function () {
-                    if(!($(this).attr('class').indexOf("tlabel") >= 0)){
+                    if(!($(this).attr('class').indexOf("tlabel") >= 0) || !($(this).attr('class').indexOf("extra-disabled") >= 0)){
                         return false; // prevent text selection in IE
                     }
                 });
