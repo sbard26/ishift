@@ -33,6 +33,7 @@ body {
 .welcome {
 	position: relative;
     margin-top:25px;
+    margin-right: 80px;
     font-family: 'Superclarendon-Bold', 'Superclarendon Bold', 'Superclarendon';
     font-weight: 700;
     font-style: normal;
@@ -63,7 +64,8 @@ body {
 .calendar {
   	border: 2px solid #000000 !important;
 	margin-top:25px;
-	max-width: 100% !important;
+    position: relative;
+
 }
 .cal-item-clickable {
   	border: 2px solid #000000 !important;
@@ -73,7 +75,7 @@ body {
 	font-weight: bold;
 	padding:0 !important;
 	margin:0 !important;
-    cursor: pointer;
+    cursor: pointer !important;
 }
 
 .cal-item-unclickable {
@@ -244,10 +246,10 @@ input {
 .notification-container {
     /*background-color: lightgrey;*/
     width: 50%;
-    height: 10%;
-    border: 2px solid black;
+    height: 50px;
+    margin-top: 20px !important;
     margin: auto;
-    position: absolute;
+    position: relative;
     left: 0; bottom: 30%; right: 0;
 }
 
