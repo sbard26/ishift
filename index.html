@@ -49,14 +49,14 @@
                         <table class="table table-bordered">
                             <tbody id ="cal-table">
                                 <tr>
-                                    <td class = "cal-item"></td>
-                                    <td class = "cal-item">SUNDAY</td>
-                                    <td class = "cal-item">MONDAY</td>
-                                    <td class = "cal-item">TUESDAY</td>
-                                    <td class = "cal-item">WEDNESDAY</td>                                
-                                    <td class = "cal-item">THURSDAY</td>
-                                    <td class = "cal-item">FRIDAY</td>
-                                    <td class = "cal-item">SATURDAY</td>
+                                    <td class = "cal-item-white"></td>
+                                    <td class = "cal-item-white">SUNDAY</td>
+                                    <td class = "cal-item-white">MONDAY</td>
+                                    <td class = "cal-item-white">TUESDAY</td>
+                                    <td class = "cal-item-white">WEDNESDAY</td>                                
+                                    <td class = "cal-item-white">THURSDAY</td>
+                                    <td class = "cal-item-white">FRIDAY</td>
+                                    <td class = "cal-item-white">SATURDAY</td>
                                 </tr>
                             </tbody>                   
                         </table>
@@ -112,14 +112,14 @@
                 maxhour = getMaxOfArray(hours_list);
                 for(i=minhour; i<maxhour+1; i++){
                     if(i< 12){
-                        row = "<tr><td class='cal-item'>"+i+" AM</td>"
+                        row = "<tr><td class='cal-item-white'>"+i+" AM</td>"
                     }
                     else{
                         j = i-12
                         if(j==0){
                             j=12
                         }
-                        row = "<tr><td class='cal-item'>"+j+" PM</td>"                       
+                        row = "<tr><td class='cal-item-white'>"+j+" PM</td>"                       
                     }
                     if(typeof storehours.sunday == 'undefined'){
                         row += "<td class = 'cal-item disabled'></td>"

@@ -56,11 +56,21 @@ body {
 }
 .cal-item {
   	border: 2px solid #000000 !important;
+    background-color: #CC0033;
   	width: 140px;
 	text-align: center;
 	font-weight: bold;
 	padding:0 !important;
 	margin:0 !important;
+}
+
+.cal-item-white {
+    border: 2px solid #000000 !important;
+    width: 140px;
+    text-align: center;
+    font-weight: bold;
+    padding:0 !important;
+    margin:0 !important;
 }
 .disabled{
     background-color: gray !important;
