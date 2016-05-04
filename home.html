@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Home - iShift</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+        <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+        <meta name="apple-mobile-web-app-capable" content="yes"/>
+        <link href="css/bootstrap.css" type="text/css" rel="stylesheet"/>
+        <link href="css/jquery-ui.css" type="text/css" rel="stylesheet"/>
+        <link href="css/styles.css" type="text/css" rel="stylesheet"/>
+        <script src="js/jquery-1.12.3.js"></script>
+        <script src="js/jquery-ui.js"></script>
+        <script src="js/bootstrap.js"></script>
+        <script src='https://cdn.firebase.com/js/client/2.2.1/firebase.js'></script>
+    </head>
+    <body>
+        <div class = "col-md-2" style = "padding:15px;">
+            <div class = "container">
+                <div class = "row">
+<!--                     <div class = "logo"> -->
+                    <span class = "logo" onclick="location.href='home.html';">iShift</span>
+                    <!-- </div> -->
+                </div>
+            </div>
+            <div class = "container">
+                <div class = "row">
+                    <div class="btn-group-vertical sidebar" role="group" aria-label="...">
+                        <a class="btn btn-default sidebar-item active"><b>Calendar View</b></a>
+                        <a class="btn btn-default sidebar-item" href = "whosworking.html"><b>Who's Working</b></a>
+                        <a class="btn btn-default sidebar-item" href = "assignshifts.html"><b>Assign Shifts</b></a>
+                        <a class="btn btn-default sidebar-item" href = "setstorehours.html"><b>Set Store Hours</b></a>
+                        <a class="btn btn-default sidebar-item" href = "setshifttimes.html"><b>Set Shift Times</b></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class = "col-md-10">
+            <div class = "container">
+                <div class = "row">
+                    <div class = "welcome pull-right">
+                        <p>Welcome, Sam!</p>
+                        <p class = "time">The current time is: 10:22 AM</p>
+                    </div>
+                </div>
+            </div>
+            <div class = "container">
+                <div class = "row">
+                    <!-- <button type="button" class="btn btn-default">
+                        <span></span>
+                    </button> -->
+                    <div class = "row" style = "margin-left:0px; max-width:80%;">
+                        <p class = "week">Week of March 27 - April 2</p>
+                        <!-- <button type="button" class="btn btn-default">
+                            <span></span>
+                        </button> -->
+                        <div class = "color-keys pull-right">
+                            <div class = "key selected"></div> <p style = "display:inline-block;"> = Open</p>
+                            <div class = "key unselected"></div> <p style = "display:inline-block;"> = Closed</p>
+                        </div>
+                    </div>
+                    <div id = "cal-wrapper" class = "table-responsive" style="max-width:80%">
+                        <table class="table table-bordered">
+                            <tbody id ="cal-table">
+                                <tr>
+                                    <td class = "cal-item-white"></td>
+                                    <td class = "cal-item-white">SUNDAY</td>
+                                    <td class = "cal-item-white">MONDAY</td>
+                                    <td class = "cal-item-white">TUESDAY</td>
+                                    <td class = "cal-item-white">WEDNESDAY</td>                                
+                                    <td class = "cal-item-white">THURSDAY</td>
+                                    <td class = "cal-item-white">FRIDAY</td>
+                                    <td class = "cal-item-white">SATURDAY</td>
+                                </tr>
+                            </tbody>                   
+                        </table>
+                    </div>
+                </div>
+                <div class = "row">
+                    <div class = "notification-container" id="notifications">
+                        <a class="btn btn-default x-button" id="xbutton" onlick="xbuttonclick()"><b>x</b></a>
+                        <p style = "color:#CC0033; font-weight:bold; font-size:13pt; float:left; margin-left:3px;">DROPPED SHIFT: </p>
+                        <p style = "font-weight:bold; font-size:13pt;white-space:pre;">  Sara dropped her shift on 4/29 from 9:00am - 3:00pm</p>
+                        <a class="btn btn-default reassign-button" href = "reassignshift.html"><b>Reassign</b></a>
+                        <a class="btn btn-default contact-Sara-button" href = "employeeinfo-sara.html"><b>Contact Sara</b></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+    <script>
+        $(document).ready(function(){
+            $('#xbutton').click(function() {
+                $('#notifications').empty();
+                $('#notifications').append("<p style = 'color:#CC0033; font-weight:bold; font-size:13pt; margin:3px; float:left'>No notifications!</p>");
+            });
+            $('#logo').click(function() {
+
+            });
+            function getMaxOfArray(numArray) {
+              return Math.max.apply(null, numArray);
+            }
+            function getMinOfArray(numArray) {
+              return Math.min.apply(null, numArray);
+            }
+            var myFirebaseRef = new Firebase("https://amber-inferno-6999.firebaseio.com/");
+            // This is only for testing purposes
+            myFirebaseRef.child('storehours').set(
+            {
+                sunday: ['10', '11', '12', '13', '14', '15'],
+                monday: ['8', '9', '10', '11', '12', '13', '14', '15', '16', '17'],
+                tuesday: ['8', '9', '10', '11', '12', '13', '14', '15', '16', '17'],
+                wednesday: ['8', '9', '10', '11', '12', '13', '14', '15', '16', '17'],
+                thursday: ['8', '9', '10', '11', '12', '13', '14', '15', '16', '17'],
+                friday: ['8', '9', '10', '11', '12', '13', '14', '15', '16', '17'],
+                saturday: ['10', '11', '12', '13', '14', '15']
+            });
+            myFirebaseRef.child('shifttimes').set(
+            {
+                Sunday: '',
+                Monday: '',
+                Tuesday: '',
+                Wednesday: '',
+                Thursday: '',
+                Friday: '',
+                Saturday: ''
+            });
+            myFirebaseRef.child('workers').set(
+                ['Spencer', 'Max', 'Sam']
+            )
+            myFirebaseRef.on("value", function(snapshot) {
+                storehours = snapshot.val().storehours;
+                hours_list = []
+                hours_list.push.apply(hours_list, storehours.sunday)
+                hours_list.push.apply(hours_list, storehours.monday)
+                hours_list.push.apply(hours_list, storehours.tuesday)
+                hours_list.push.apply(hours_list, storehours.wednesday)
+                hours_list.push.apply(hours_list, storehours.thursday)
+                hours_list.push.apply(hours_list, storehours.friday)
+                hours_list.push.apply(hours_list, storehours.saturday)
+                minhour = getMinOfArray(hours_list);
+                maxhour = getMaxOfArray(hours_list);
+                trs = $('tr')
+                for(i=0; i<trs.length; i++){
+                    if($(trs[i]).attr('class') == 'datarow'){
+                        $(trs[i]).remove();
+                    }
+                }
+                for(i=minhour; i<maxhour+1; i++){
+                    if(i< 12){
+                        if(i==0){
+                            row = "<tr class ='datarow'><td class='cal-item-white'>12 AM</td>"
+                        }
+                        else{
+                            row = "<tr class ='datarow'><td class='cal-item-white'>"+i+" AM</td>"
+                        }
+                    }
+                    else{
+                        j = i-12
+                        if(j==0){
+                            j=12
+                        }
+                        row = "<tr class ='datarow'><td class='cal-item-white'>"+j+" PM</td>"                       
+                    }
+                    if(typeof storehours.sunday == 'undefined'){
+                        row += "<td class = 'cal-item-unclickable disabled'></td>"
+                    }
+                    else{
+                        if(!(storehours.sunday.indexOf(i.toString()) >= 0)){
+                            row += "<td class = 'cal-item-unclickable disabled'></td>"
+                        }
+                        else{
+                            row += "<td class = 'cal-item-unclickable'></td>"
+                        }
+                    }
+                    if(typeof storehours.monday == 'undefined'){
+                        row += "<td class = 'cal-item-unclickable disabled'></td>"
+                    }
+                    else{
+                        if(!(storehours.monday.indexOf(i.toString()) >= 0)){
+                            row += "<td class = 'cal-item-unclickable disabled'></td>"
+                        }
+                        else{
+                            row += "<td class = 'cal-item-unclickable'></td>"
+                        }
+                    }
+                    if(typeof storehours.tuesday == 'undefined'){
+                        row += "<td class = 'cal-item-unclickable disabled'></td>"
+                    }
+                    else{
+                        if(!(storehours.tuesday.indexOf(i.toString()) >= 0)){
+                            row += "<td class = 'cal-item-unclickable disabled'></td>"
+                        }
+                        else{
+                            row += "<td class = 'cal-item-unclickable'></td>"
+                        }
+                    }
+                    if(typeof storehours.wednesday == 'undefined'){
+                        row += "<td class = 'cal-item-unclickable disabled'></td>"
+                    }
+                    else{
+                        if(!(storehours.wednesday.indexOf(i.toString()) >= 0)){
+                            row += "<td class = 'cal-item-unclickable disabled'></td>"
+                        }
+                        else{
+                            row += "<td class = 'cal-item-unclickable'></td>"
+                        }
+                    }                 
+                    if(typeof storehours.thursday == 'undefined'){
+                        row += "<td class = 'cal-item-unclickable disabled'></td>"
+                    }
+                    else{
+                        if(!(storehours.thursday.indexOf(i.toString()) >= 0)){
+                            row += "<td class = 'cal-item-unclickable disabled'></td>"
+                        }
+                        else{
+                            row += "<td class = 'cal-item-unclickable'></td>"
+                        }
+                    }                     
+                    if(typeof storehours.friday == 'undefined'){
+                        row += "<td class = 'cal-item-unclickable disabled'></td>"
+                    }
+                    else{
+                        if(!(storehours.friday.indexOf(i.toString()) >= 0)){
+                            row += "<td class = 'cal-item-unclickable disabled'></td>"
+                        }
+                        else{
+                            row += "<td class = 'cal-item-unclickable'></td>"
+                        }
+                    }                 
+                    if(typeof storehours.saturday == 'undefined'){
+                        row += "<td class = 'cal-item-unclickable disabled'></td>"
+                    }
+                    else{
+                        if(!(storehours.saturday.indexOf(i.toString()) >= 0)){
+                            row += "<td class = 'cal-item-unclickable disabled'></td>"
+                        }
+                        else{
+                            row += "<td class = 'cal-item-unclickable'></td>"
+                        }
+                    }                 
+                    $('#cal-table').append(row + "</tr>")
+                }
+            });
+        });
+    </script>
+</html>
