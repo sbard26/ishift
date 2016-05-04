@@ -70,7 +70,7 @@ body {
 }
 .cal-item-clickable {
   	border: 2px solid #000000 !important;
-    background-color: #CC0033;
+    /*background-color: #CC0033;*/
   	width: 140px;
 	text-align: center;
 	font-weight: bold;
