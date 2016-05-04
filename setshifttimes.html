@@ -561,16 +561,19 @@
             console.log(day);
             for(i=0; i< days_of_the_week.length; i++){
                 if(days_of_the_week[i] != day){
-                  checkbox = '<div class="checkbox"><label><input type="checkbox" id = "' + days_of_the_week[i] + 'box"> ' +days_of_the_week[i]+ '</label></div>'
+                  checkbox = '<div class="checkbox"><label><input type="checkbox" id = "' + days_of_the_week[i] + 'box" name = "' + days_of_the_week[i]  + '"" /> ' +days_of_the_week[i]+ '</label></div>'
                   $('#repeatboxes').append(checkbox);
                 }
                 else{
-                    checkbox = '<div class="checkbox"><label><input type="checkbox" disabled="disabled" checked="checked" id = "' + days_of_the_week[i] + 'box">' + days_of_the_week[i] +'</label></div>'
+                    checkbox = '<div class="checkbox"><label id ="disabledbox"><input type="checkbox" disabled="disabled" checked="checked" name = "' + days_of_the_week[i]  + '" />' + days_of_the_week[i] +'</label></div>'
                     $('#repeatboxes').append(checkbox);
                 }
             }
             if(count > 1){
                 alert("Please create a default shift for one day at a time");
+            }
+            else if(count == 0){
+                alert("Please create a default shift before submitting");
             }
             else{
                 $('#myModal').modal('show');
@@ -646,18 +649,82 @@
                     $('#myModal').modal('hide');
                     myFirebaseRef.on("value", function(snapshot) {
                         shifttimes = snapshot.val().shifttimes;
-                        myFirebaseRef.update({ shifttimes: 
-                            {
-                                sunday: sundayh,
-                                monday: mondayh,
-                                tuesday: tuesdayh,
-                                wednesday: wednesdayh,
-                                thursday: thursdayh,
-                                friday: fridayh,
-                                saturday: saturdayh
-                            } 
+                        console.log(shifttimes);
+                        day = $('#disabledbox').text()
+                        numemployees = $('#numemployees').val();
+                        var selected = [];
+                        $('#repeatboxes input:checked').each(function() {
+                            selected.push($(this).attr('name'));
                         });
+                        if(day == 'Sunday'){
+                            shift_hours = sundayh
+                        }
+                        else if(day == 'Monday'){
+                            shift_hours = mondayh
+                        }
+                        else if(day == 'Tuesday'){
+                            shift_hours = tuesdayh
+                        }
+                        else if(day == 'Wednesday'){
+                            shift_hours = wednesdayh
+                        }
+                        else if(day == 'Thursday'){
+                            shift_hours = thursdayh
+                        }
+                        else if(day == 'Friday'){
+                            shift_hours = fridayh
+                        }
+                        else if(day == 'Saturday'){
+                            shift_hours = saturdayh
+                        }
+                        for(i=0; i<selected.length; i++){
+                            if(selected[i] == 'Sunday'){
+                                if(shifttimes.Sunday == ''){
+                                    shifttimes.Sunday = []
+                                }
+                                shifttimes.Sunday.push({hours: shift_hours, numemployees: numemployees});
+                            }
+                            else if(selected[i] == 'Monday'){
+                                if(shifttimes.Monday == ''){
+                                    shifttimes.Monday = []
+                                }
+                                shifttimes.Monday.push({hours: shift_hours, numemployees: numemployees});
+                            }
+                            else if(selected[i] == 'Tuesday'){
+                                if(shifttimes.Tuesday == ''){
+                                    shifttimes.Tuesday = []
+                                }
+                                shifttimes.Tuesday.push({hours: shift_hours, numemployees: numemployees});
+                            }
+                            else if(selected[i] == 'Wednesday'){
+                                if(shifttimes.Wednesday == ''){
+                                    shifttimes.Wednesday = []
+                                }
+                                shifttimes.Wednesday.push({hours: shift_hours, numemployees: numemployees});
+                            }
+                            else if(selected[i] == 'Thursday'){
+                                if(shifttimes.Thursday == ''){
+                                    shifttimes.Thursday = []
+                                }
+                                shifttimes.Thursday.push({hours: shift_hours, numemployees: numemployees});
+                            }
+                            else if(selected[i] == 'Friday'){
+                                if(shifttimes.Friday == ''){
+                                    shifttimes.Friday = []
+                                }
+                                shifttimes.Friday.push({hours: shift_hours, numemployees: numemployees});
+                            }
+                            else if(selected[i] == 'Saturday'){
+                                if(shifttimes.Saturday == ''){
+                                    shifttimes.Saturday = []
+                                }
+                                shifttimes.Saturday.push({hours: shift_hours, numemployees: numemployees});
+                            }
+                        }
                     });
+                    $('#hourslist').empty();
+                    $('#repeatboxes').empty();
+                    myFirebaseRef.child('shifttimes').update(shifttimes);
                 }
             }
             var isMouseDown = false;
