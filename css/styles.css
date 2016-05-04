@@ -234,7 +234,9 @@ body {
     margin-left: 40px;
 
 }
-
+.button-wrapper{
+    max-width: 80%;
+}
 .cancel-button {
     display: inline-block;
     margin-right: 40px;
