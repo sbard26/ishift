@@ -246,12 +246,8 @@ input {
 
 .notification-container {
     /*background-color: lightgrey;*/
-    width: 50%;
-    height: 50px;
-    margin-top: 20px !important;
-    margin: auto;
     position: relative;
-    left: 0; bottom: 30%; right: 0;
+    width: 80%;
 }
 
 .x-button {
