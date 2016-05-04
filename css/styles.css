@@ -58,8 +58,29 @@ body {
 }
 
 .week {
+    display: inline-block;
     font-family: 'Superclarendon-Bold', 'Superclarendon Bold', 'Superclarendon';
     font-size: 16px;
+}
+
+.color-keys {
+    display: inline-block;
+}
+
+.key {
+    display: inline-block;
+    height: 10px;
+    width: 10px;
+    border: 1px solid rgba(0, 0, 0, .2);
+    /*float: right;*/
+}
+
+.selected {
+    background: #CC0033; 
+}
+
+.unselected {
+    background: lightgray;
 }
 
 .calendar {
