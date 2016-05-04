@@ -328,6 +328,8 @@
                 $('#frShifts').empty();
                 $('#saShifts').empty();
                 console.log(sundayshifts.length);
+                numassigned = 0
+                numunassigned = 0
                 for(i=0;i<sundayshifts.length;i++){
                     shift = sundayshifts[i]
                     hours = shift.hours;
@@ -345,12 +347,14 @@
                             clean_hours.push(' ' + j+' PM');
                         }
                     }
-                    numassigned = shift.assigned;
-                    numunassigned = shift.unassigned;
+                    numassigned += shift.assigned;
+                    numunassigned += shift.unassigned;
                     day = 'Sunday'
-                    $('#suStats').html('<p><b>Assigned</b>: ' + numassigned + '   <b>Unassigned</b>: ' + numunassigned + '</p>');
                     $('#suShifts').append('<li style="white-space:pre;margin-bottom:5px;"><b>Hours: </b>' + clean_hours + '   <b>Workers Assigned: </b>' + shift.assignedworkers + '<button type="button" class="btn btn-primary btn-xs pull-right" onclick="assignshift(shift,day,index)" style="background-color:#CC0033;"">Assign Shift</button></li>');
                 }
+                $('#suStats').html('<p><b>Assigned</b>: ' + numassigned + '   <b>Unassigned</b>: ' + numunassigned + '</p>');
+                numassigned = 0
+                numunassigned = 0                
                 for(i=0;i<mondayshifts.length;i++){
                     shift = mondayshifts[i]
                     hours = shift.hours;
@@ -371,9 +375,11 @@
                     numassigned = shift.assigned;
                     numunassigned = shift.unassigned;
                     day = 'Monday'
-                    $('#moStats').html('<p><b>Assigned</b>: ' + numassigned + '   <b>Unassigned</b>: ' + numunassigned + '</p>');
                     $('#moShifts').append('<li style="white-space:pre;margin-bottom:5px;"><b>Hours: </b>' + clean_hours + '   <b>Workers Assigned: </b>' + shift.assignedworkers + '<button type="button" class="btn btn-primary btn-xs pull-right" onclick="assignshift(shift,day,index)" style="background-color:#CC0033;"">Assign Shift</button></li>');
                 }
+                $('#moStats').html('<p><b>Assigned</b>: ' + numassigned + '   <b>Unassigned</b>: ' + numunassigned + '</p>');
+                numassigned = 0
+                numunassigned = 0
                 for(i=0;i<tuesdayshifts.length;i++){
                     shift = tuesdayshifts[i]
                     hours = shift.hours;
@@ -397,6 +403,9 @@
                     $('#tuStats').html('<p><b>Assigned</b>: ' + numassigned + '   <b>Unassigned</b>: ' + numunassigned + '</p>');
                     $('#tuShifts').append('<li style="white-space:pre;margin-bottom:5px;"><b>Hours: </b>' + clean_hours + '   <b>Workers Assigned: </b>' + shift.assignedworkers + '<button type="button" class="btn btn-primary btn-xs pull-right" onclick="assignshift(shift,day,index)" style="background-color:#CC0033;"">Assign Shift</button></li>');
                 }
+                $('#tuStats').html('<p><b>Assigned</b>: ' + numassigned + '   <b>Unassigned</b>: ' + numunassigned + '</p>');
+                numassigned = 0
+                numunassigned = 0
                 for(i=0;i<wednesdayshifts.length;i++){
                     shift = wednesdayshifts[i]
                     hours = shift.hours;
@@ -420,6 +429,9 @@
                     $('#weStats').html('<p><b>Assigned</b>: ' + numassigned + '   <b>Unassigned</b>: ' + numunassigned + '</p>');
                     $('#weShifts').append('<li style="white-space:pre;margin-bottom:5px;"><b>Hours: </b>' + clean_hours + '   <b>Workers Assigned: </b>' + shift.assignedworkers + '<button type="button" class="btn btn-primary btn-xs pull-right" onclick="assignshift(shift,day,index)" style="background-color:#CC0033;"">Assign Shift</button></li>');
                 }
+                $('#weStats').html('<p><b>Assigned</b>: ' + numassigned + '   <b>Unassigned</b>: ' + numunassigned + '</p>');
+                numassigned = 0
+                numunassigned = 0
                 for(i=0;i<thursdayshifts.length;i++){
                     shift = thursdayshifts[i]
                     hours = shift.hours;
@@ -443,6 +455,9 @@
                     $('#thStats').html('<p><b>Assigned</b>: ' + numassigned + '   <b>Unassigned</b>: ' + numunassigned + '</p>');
                     $('#thShifts').append('<li style="white-space:pre;margin-bottom:5px;"><b>Hours: </b>' + clean_hours + '   <b>Workers Assigned: </b>' + shift.assignedworkers + '<button type="button" class="btn btn-primary btn-xs pull-right" onclick="assignshift(shift,day,index)" style="background-color:#CC0033;"">Assign Shift</button></li>');
                 }
+                $('#thStats').html('<p><b>Assigned</b>: ' + numassigned + '   <b>Unassigned</b>: ' + numunassigned + '</p>');
+                numassigned = 0
+                numunassigned = 0
                 for(i=0;i<fridayshifts.length;i++){
                     shift = fridayshifts[i]
                     hours = shift.hours;
@@ -466,6 +481,9 @@
                     $('#frStats').html('<p><b>Assigned</b>: ' + numassigned + '   <b>Unassigned</b>: ' + numunassigned + '</p>');
                     $('#frShifts').append('<li style="white-space:pre;margin-bottom:5px;"><b>Hours: </b>' + clean_hours + '   <b>Workers Assigned: </b>' + shift.assignedworkers + '<button type="button" class="btn btn-primary btn-xs pull-right" onclick="assignshift(shift,day,index)" style="background-color:#CC0033;"">Assign Shift</button></li>');
                 }
+                $('#frStats').html('<p><b>Assigned</b>: ' + numassigned + '   <b>Unassigned</b>: ' + numunassigned + '</p>');
+                numassigned = 0
+                numunassigned = 0
                 for(i=0;i<saturdayshifts.length;i++){
                     shift = saturdayshifts[i]
                     hours = shift.hours;
@@ -489,6 +507,9 @@
                     $('#saStats').html('<p><b>Assigned</b>: ' + numassigned + '   <b>Unassigned</b>: ' + numunassigned + '</p>');
                     $('#saShifts').append('<li style="white-space:pre;margin-bottom:5px;"><b>Hours: </b>' + clean_hours + '   <b>Workers Assigned: </b>' + shift.assignedworkers + '<button type="button" class="btn btn-primary btn-xs pull-right" onclick="assignshift(shift,day,index)" style="background-color:#CC0033;"">Assign Shift</button></li>');
                 }
+                $('#saStats').html('<p><b>Assigned</b>: ' + numassigned + '   <b>Unassigned</b>: ' + numunassigned + '</p>');
+                numassigned = 0
+                numunassigned = 0
                 $('#workerlist').empty();
                 for(i=0;i<workers.length;i++){
                     $('#workerlist').append('<li>'+workers[i]+'</li>');
