@@ -48,96 +48,6 @@
                     <div id = "cal-wrapper" class = "table-responsive" style="max-width:80%">
                         <table class="table table-bordered calendar" id="calendar">
                             <tbody class = "calendartable">
-                                <tr>
-                                    <td class = "cal-item tlabel">Available Workers</td>
-                                    <td class = "cal-item tlabel">9:00am</td>
-                                    <td class = "cal-item tlabel">10:00am</td>
-                                    <td class = "cal-item tlabel">11:00am</td>
-                                    <td class = "cal-item tlabel">12:00pm</td>                                
-                                    <td class = "cal-item tlabel">1:00pm</td>
-                                    <td class = "cal-item tlabel">2:00pm</td>
-                                </tr>
-                                <tr id = "0">
-                                    <td class = "cal-item tlabel">John B.</td>
-                                    <td class = "cal-item disabled" id = "su0"></td>
-                                    <td class = "cal-item disabled" id = "mo0"></td>
-                                    <td class = "cal-item disabled" id = "tu0"></td>
-                                    <td class = "cal-item disabled" id = "we0"></td>                                
-                                    <td class = "cal-item disabled" id = "th0"></td>
-                                    <td class = "cal-item disabled" id = "fr0"></td>
-                                </tr>
-                                <tr id = "1">
-                                    <td class = "cal-item tlabel">Spencer B.</td>
-                                    <td class = "cal-item disabled" id = "su1"></td>
-                                    <td class = "cal-item disabled" id = "mo1"></td>
-                                    <td class = "cal-item disabled" id = "tu1"></td>
-                                    <td class = "cal-item disabled" id = "we1"></td>                                
-                                    <td class = "cal-item disabled" id = "th1"></td>
-                                    <td class = "cal-item disabled" id = "fr1"></td>
-                                </tr>
-                                <tr id = "2">
-                                    <td class = "cal-item tlabel">Bob D.</td>
-                                    <td class = "cal-item disabled" id = "su2"></td>
-                                    <td class = "cal-item disabled" id = "mo2"></td>
-                                    <td class = "cal-item disabled" id = "tu2"></td>
-                                    <td class = "cal-item disabled" id = "we2"></td>                                
-                                    <td class = "cal-item disabled" id = "th2"></td>
-                                    <td class = "cal-item disabled" id = "fr2"></td>
-                                </tr>
-                                <tr id = "3">
-                                    <td class = "cal-item tlabel">Bill R.</td>
-                                    <td class = "cal-item disabled" id = "su3"></td>
-                                    <td class = "cal-item disabled" id = "mo3"></td>
-                                    <td class = "cal-item disabled" id = "tu3"></td>
-                                    <td class = "cal-item disabled" id = "we3"></td>                                
-                                    <td class = "cal-item disabled" id = "th3"></td>
-                                    <td class = "cal-item disabled" id = "fr3"></td>
-                                <tr>
-                                <tr id = "4">
-                                    <td class = "cal-item tlabel">Sam F.</td>
-                                    <td class = "cal-item disabled" id = "su4"></td>
-                                    <td class = "cal-item disabled" id = "mo4"></td>
-                                    <td class = "cal-item disabled" id = "tu4"></td>
-                                    <td class = "cal-item disabled" id = "we4"></td>                                
-                                    <td class = "cal-item disabled" id = "th4"></td>
-                                    <td class = "cal-item disabled" id = "fr4"></td>
-                                </tr>  
-                                <tr id = "5">
-                                    <td class = "cal-item tlabel">Fred G.</td>
-                                    <td class = "cal-item disabled" id = "su5"></td>
-                                    <td class = "cal-item disabled" id = "mo5"></td>
-                                    <td class = "cal-item disabled" id = "tu5"></td>
-                                    <td class = "cal-item disabled" id = "we5"></td>                                
-                                    <td class = "cal-item disabled" id = "th5"></td>
-                                    <td class = "cal-item disabled" id = "fr5"></td>
-                                </tr>
-                                <tr id = "6">
-                                    <td class = "cal-item tlabel">Jacob T.</td>
-                                    <td class = "cal-item disabled" id = "su6"></td>
-                                    <td class = "cal-item disabled" id = "mo6"></td>
-                                    <td class = "cal-item disabled" id = "tu6"></td>
-                                    <td class = "cal-item disabled" id = "we6"></td>                                
-                                    <td class = "cal-item disabled" id = "th6"></td>
-                                    <td class = "cal-item disabled" id = "fr6"></td>
-                                </tr>
-                                <tr id = "7">
-                                    <td class = "cal-item tlabel">Nate R.</td>
-                                    <td class = "cal-item disabled" id = "su7"></td>
-                                    <td class = "cal-item disabled" id = "mo7"></td>
-                                    <td class = "cal-item disabled" id = "tu7"></td>
-                                    <td class = "cal-item disabled" id = "we7"></td>                                
-                                    <td class = "cal-item disabled" id = "th7"></td>
-                                    <td class = "cal-item disabled" id = "fr7"></td>
-                                </tr>
-                                <tr id = "8">
-                                    <td class = "cal-item tlabel">Dan M.</td>
-                                    <td class = "cal-item disabled" id = "su8"></td>
-                                    <td class = "cal-item disabled" id = "mo8"></td>
-                                    <td class = "cal-item disabled" id = "tu8"></td>
-                                    <td class = "cal-item disabled" id = "we8"></td>                                
-                                    <td class = "cal-item disabled" id = "th8"></td>
-                                    <td class = "cal-item disabled" id = "fr8"></td>
-                                </tr>
                             </tbody>                   
                         </table>
                     </div>
@@ -155,33 +65,46 @@
         </div>
     </body>
     <script>
-        $(document).ready(function(){
-            var isMouseDown = false;
-            $("#calendar td")
-                .mousedown(function () {
-                    if(!($(this).attr('class').indexOf("tlabel") >= 0)){
-                        isMouseDown = true;
-                        $(this).toggleClass("disabled");
-                        return false; // prevent text selection
-                    }
-                })
-                .mouseover(function () {
-                    if (isMouseDown) {
+        var myFirebaseRef = new Firebase("https://amber-inferno-6999.firebaseio.com/");
+        function settable(){
+            $('.calendartable').empty();
+            $('.calendartable').append('<tr><td class = "cal-item tlabel">Available Workers</td><td class = "cal-item tlabel">9:00am</td><td class = "cal-item tlabel">10:00am</td><td class = "cal-item tlabel">11:00am</td><td class = "cal-item tlabel">12:00pm</td><td class = "cal-item tlabel">1:00pm</td><td class = "cal-item tlabel">2:00pm</td></tr>');
+            myFirebaseRef.on("value", function(snapshot) {
+                workers = snapshot.val().workers;
+                for(i=0;i<workers.length;i++){
+                    tr = '<tr id = "'+i+'"><td class = "cal-item tlabel">'+workers[i]+'</td><td class = "cal-item disabled" id = "su'+i+'"></td><td class = "cal-item disabled" id = "mo'+i+'"></td><td class = "cal-item disabled" id = "tu'+i+'"></td><td class = "cal-item disabled" id = "we'+i+'"></td><td class = "cal-item disabled" id = "th'+i+'"></td><td class = "cal-item disabled" id = "fr'+i+'"></td></tr>'
+                    $('.calendartable').append(tr);
+                }
+                var isMouseDown = false;
+                $("#calendar td")
+                    .mousedown(function () {
                         if(!($(this).attr('class').indexOf("tlabel") >= 0)){
+                            isMouseDown = true;
                             $(this).toggleClass("disabled");
+                            return false; // prevent text selection
                         }
-                    }
-                })
-                .bind("selectstart", function () {
-                    if(!($(this).attr('class').indexOf("tlabel") >= 0)){
-                        return false; // prevent text selection in IE
-                    }
-                });
-                $(document).mouseup(function () {
-                    // if(!($(this).attr('class').indexOf("tlabel") >= 0)){
-                        isMouseDown = false;
-                    // }
-                });
+                    })
+                    .mouseover(function () {
+                        if (isMouseDown) {
+                            if(!($(this).attr('class').indexOf("tlabel") >= 0)){
+                                $(this).toggleClass("disabled");
+                            }
+                        }
+                    })
+                    .bind("selectstart", function () {
+                        if(!($(this).attr('class').indexOf("tlabel") >= 0)){
+                            return false; // prevent text selection in IE
+                        }
+                    });
+                    $(document).mouseup(function () {
+                        // if(!($(this).attr('class').indexOf("tlabel") >= 0)){
+                            isMouseDown = false;
+                        // }
+                    });
             });
+        }
+        $(document).ready(function(){
+            settable();
+        });
     </script>
 </html>

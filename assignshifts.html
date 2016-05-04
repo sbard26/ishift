@@ -67,6 +67,8 @@
                             </div>
                             <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
                                 <div class="panel-body">
+                                    <ul id = "suShifts" style="list-style-type:none;">
+                                    </ul>
                                 </div>
                             </div>
                         </div>
@@ -82,6 +84,8 @@
                             </div>
                             <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
                                 <div class="panel-body">
+                                    <ul id = "moShifts" style="list-style-type:none;">
+                                    </ul>
                                 </div>
                             </div>
                         </div>
@@ -97,6 +101,8 @@
                             </div>
                             <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
                                 <div class="panel-body">
+                                    <ul id = "tuShifts" style="list-style-type:none;">
+                                    </ul>
                                 </div>
                             </div>
                         </div>
@@ -112,6 +118,8 @@
                             </div>
                             <div id="collapseFour" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFour">
                                 <div class="panel-body">
+                                    <ul id = "weShifts" style="list-style-type:none;">
+                                    </ul>
                                 </div>
                             </div>
                         </div>
@@ -127,6 +135,8 @@
                             </div>
                             <div id="collapseFive" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFive">
                                 <div class="panel-body">
+                                    <ul id = "thShifts" style="list-style-type:none;">
+                                    </ul>
                                 </div>
                             </div>
                         </div>
@@ -142,6 +152,8 @@
                             </div>
                             <div id="collapseSix" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingSix">
                                 <div class="panel-body">
+                                    <ul id = "frShifts" style="list-style-type:none;">
+                                    </ul>
                                 </div>
                             </div>
                         </div>
@@ -157,6 +169,8 @@
                             </div>
                             <div id="collapseSeven" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingSeven">
                                 <div class="panel-body">
+                                    <ul id = "saShifts" style="list-style-type:none;">
+                                    </ul>                                
                                 </div>
                             </div>
                         </div>
@@ -188,20 +202,55 @@
                         </div><!-- /.modal-content -->
                     </div><!-- /.modal-dialog -->
                 </div><!-- /.modal -->
+                <div class="modal fade" tabindex="-1" role="dialog" id="myModal2">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                <h4 class="modal-title">Assign Shift:</h4>
+                            </div>
+                            <div class="modal-body">
+                                <p id ="shifthours"></p>
+                                <div class="form-group" id="shiftform">
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" style="background-color:#CC0033;color:#fff" onclick="submitassignment()">Done</button>
+                            </div>
+                        </div><!-- /.modal-content -->
+                    </div><!-- /.modal-dialog -->
+                </div><!-- /.modal -->
             </div>
         </div>
     </body>
     <script>
         var myFirebaseRef = new Firebase("https://amber-inferno-6999.firebaseio.com/");
+        var curshift=''
+        var curday=''
+        var curindex=-1
         function deleteworker(worker){
             myFirebaseRef.on("value", function(snapshot) {
                 workers = snapshot.val().workers;
+                shifttimes = snapshot.val().workers;
+                for(i=0;i<shifttimes.length;i++){
+                    if(typeof(shifttimes[i]) == undefined){
+                        for(j=0;j<shifttimes[i].length;j++){
+                            if((typeof(shifttimes[i][j].assignedworkers) == undefined) || (shifttimes[i][j].assignedworkers != '')){
+                                idx = shifttimes[i][j].assignedworkers.indexOf(worker);
+                                if(idx>-1){
+                                    shifttimes[i][j].assignedworkers.splice(idx,1);
+                                }
+                                shifttimes[i][j].assigned = shifttimes[i][j].assigned - 1
+                                shifttimes[i][j].unassigned = shifttimes[i][j].unassigned + 1
+                            }
+                        }                        
+                    }
+                }
                 idx = workers.indexOf(worker);
                 if(idx>-1){
                     workers.splice(idx,1);
                 }
             });
-            console.log(workers);
             myFirebaseRef.child('workers').set(workers);
         }
         function editworkers(){
@@ -225,18 +274,42 @@
                 myFirebaseRef.child('workers').set(workers);  
             }
         }
-        $(document).ready(function(){
-            $('#logo').click(function() {
-
+        function assignshift(shift,day,index){
+            curshift = shift
+            curday = day
+            curindex = index
+            console.log(index);
+            hours = shift.hours
+            clean_hours = []
+            for(i=0;i<hours.length;i++){
+                if(hours[i]< 12){
+                    clean_hours.push(' ' + hours[i]+' AM');
+                }
+                else{
+                    j = hours[i]-12
+                    if(j==0){
+                        j=12
+                    }
+                    clean_hours.push(' ' + j+' PM');
+                }
+            }
+            myFirebaseRef.on("value", function(snapshot) {
+                workers = snapshot.val().workers;
             });
-            document.getElementById("editworkers").addEventListener ("click", editworkers, false);
-            document.getElementById("addworker").addEventListener ("click", addworker, false);
-            function getMaxOfArray(numArray) {
-              return Math.max.apply(null, numArray);
-            }
-            function getMinOfArray(numArray) {
-              return Math.min.apply(null, numArray);
-            }
+            $('#shifthours').html(clean_hours);
+            $('#shiftform').empty()
+            for(i=0;i<shift.unassigned;i++){
+                n = i + 1
+                $('#shiftform').append('<h5 style=margin-bottom:5px;>Worker ' + n + ':</h5>')
+                $('#shiftform').append('<select class="form-control" style="margin-bottom:10px;" id="workerselect'+i+'">')
+                for(j=0;j<workers.length;j++){
+                    $('#workerselect'+i).append('<option>' +workers[j]+ '</option>');
+                }
+                $('#shiftform').append('</select>')
+            }         
+            $('#myModal2').modal('show')
+        }
+        function refreshlist(){
             myFirebaseRef.on("value", function(snapshot) {
                 shifttimes = snapshot.val().shifttimes;
                 sundayshifts = shifttimes.Sunday;
@@ -247,47 +320,232 @@
                 fridayshifts = shifttimes.Friday;
                 saturdayshifts = shifttimes.Saturday;
                 workers = snapshot.val().workers;
+                $('#suShifts').empty();
+                $('#moShifts').empty();
+                $('#tuShifts').empty();
+                $('#weShifts').empty();
+                $('#thShifts').empty();
+                $('#frShifts').empty();
+                $('#saShifts').empty();
+                console.log(sundayshifts.length);
                 for(i=0;i<sundayshifts.length;i++){
-                    numassigned = sundayshifts[i].assigned;
-                    numunassigned = Number(sundayshifts[i].numemployees) - numassigned;
+                    shift = sundayshifts[i]
+                    hours = shift.hours;
+                    index = i
+                    clean_hours = []
+                    for(k=0;k<hours.length;k++){
+                        if(hours[k]< 12){
+                            clean_hours.push(' ' + hours[k]+' AM');
+                        }
+                        else{
+                            j = hours[k]-12
+                            if(j==0){
+                                j=12
+                            }
+                            clean_hours.push(' ' + j+' PM');
+                        }
+                    }
+                    numassigned = shift.assigned;
+                    numunassigned = shift.unassigned;
+                    day = 'Sunday'
                     $('#suStats').html('<p><b>Assigned</b>: ' + numassigned + '   <b>Unassigned</b>: ' + numunassigned + '</p>');
+                    $('#suShifts').append('<li style="white-space:pre;margin-bottom:5px;"><b>Hours: </b>' + clean_hours + '   <b>Workers Assigned: </b>' + shift.assignedworkers + '<button type="button" class="btn btn-primary btn-xs pull-right" onclick="assignshift(shift,day,index)" style="background-color:#CC0033;"">Assign Shift</button></li>');
                 }
                 for(i=0;i<mondayshifts.length;i++){
-                    numassigned = mondayshifts[i].assigned;
-                    numunassigned = Number(mondayshifts[i].numemployees) - numassigned;
+                    shift = mondayshifts[i]
+                    hours = shift.hours;
+                    index = i
+                    clean_hours = []
+                    for(k=0;k<hours.length;k++){
+                        if(hours[k]< 12){
+                            clean_hours.push(' ' + hours[k]+' AM');
+                        }
+                        else{
+                            j = hours[k]-12
+                            if(j==0){
+                                j=12
+                            }
+                            clean_hours.push(' ' + j+' PM');
+                        }
+                    }
+                    numassigned = shift.assigned;
+                    numunassigned = shift.unassigned;
+                    day = 'Monday'
                     $('#moStats').html('<p><b>Assigned</b>: ' + numassigned + '   <b>Unassigned</b>: ' + numunassigned + '</p>');
+                    $('#moShifts').append('<li style="white-space:pre;margin-bottom:5px;"><b>Hours: </b>' + clean_hours + '   <b>Workers Assigned: </b>' + shift.assignedworkers + '<button type="button" class="btn btn-primary btn-xs pull-right" onclick="assignshift(shift,day,index)" style="background-color:#CC0033;"">Assign Shift</button></li>');
                 }
                 for(i=0;i<tuesdayshifts.length;i++){
-                    numassigned = tuesdayshifts[i].assigned;
-                    numunassigned = Number(tuesdayshifts[i].numemployees) - numassigned;
+                    shift = tuesdayshifts[i]
+                    hours = shift.hours;
+                    index = i
+                    clean_hours = []
+                    for(k=0;k<hours.length;k++){
+                        if(hours[k]< 12){
+                            clean_hours.push(' ' + hours[k]+' AM');
+                        }
+                        else{
+                            j = hours[k]-12
+                            if(j==0){
+                                j=12
+                            }
+                            clean_hours.push(' ' + j+' PM');
+                        }
+                    }
+                    numassigned = shift.assigned;
+                    numunassigned = shift.unassigned;
+                    day = 'Tuesday'
                     $('#tuStats').html('<p><b>Assigned</b>: ' + numassigned + '   <b>Unassigned</b>: ' + numunassigned + '</p>');
+                    $('#tuShifts').append('<li style="white-space:pre;margin-bottom:5px;"><b>Hours: </b>' + clean_hours + '   <b>Workers Assigned: </b>' + shift.assignedworkers + '<button type="button" class="btn btn-primary btn-xs pull-right" onclick="assignshift(shift,day,index)" style="background-color:#CC0033;"">Assign Shift</button></li>');
                 }
                 for(i=0;i<wednesdayshifts.length;i++){
-                    numassigned = wednesdayshifts[i].assigned;
-                    numunassigned = Number(wednesdayshifts[i].numemployees) - numassigned;
+                    shift = wednesdayshifts[i]
+                    hours = shift.hours;
+                    index = i
+                    clean_hours = []
+                    for(k=0;k<hours.length;k++){
+                        if(hours[k]< 12){
+                            clean_hours.push(' ' + hours[k]+' AM');
+                        }
+                        else{
+                            j = hours[k]-12
+                            if(j==0){
+                                j=12
+                            }
+                            clean_hours.push(' ' + j+' PM');
+                        }
+                    }
+                    numassigned = shift.assigned;
+                    numunassigned = shift.unassigned;
+                    day = 'Wednesday'
                     $('#weStats').html('<p><b>Assigned</b>: ' + numassigned + '   <b>Unassigned</b>: ' + numunassigned + '</p>');
+                    $('#weShifts').append('<li style="white-space:pre;margin-bottom:5px;"><b>Hours: </b>' + clean_hours + '   <b>Workers Assigned: </b>' + shift.assignedworkers + '<button type="button" class="btn btn-primary btn-xs pull-right" onclick="assignshift(shift,day,index)" style="background-color:#CC0033;"">Assign Shift</button></li>');
                 }
                 for(i=0;i<thursdayshifts.length;i++){
-                    numassigned = thursdayshifts[i].assigned;
-                    numunassigned = Number(thursdayshifts[i].numemployees) - numassigned;
+                    shift = thursdayshifts[i]
+                    hours = shift.hours;
+                    index = i
+                    clean_hours = []
+                    for(k=0;k<hours.length;k++){
+                        if(hours[k]< 12){
+                            clean_hours.push(' ' + hours[k]+' AM');
+                        }
+                        else{
+                            j = hours[k]-12
+                            if(j==0){
+                                j=12
+                            }
+                            clean_hours.push(' ' + j+' PM');
+                        }
+                    }
+                    numassigned = shift.assigned;
+                    numunassigned = shift.unassigned;
+                    day = 'Thursday'
                     $('#thStats').html('<p><b>Assigned</b>: ' + numassigned + '   <b>Unassigned</b>: ' + numunassigned + '</p>');
+                    $('#thShifts').append('<li style="white-space:pre;margin-bottom:5px;"><b>Hours: </b>' + clean_hours + '   <b>Workers Assigned: </b>' + shift.assignedworkers + '<button type="button" class="btn btn-primary btn-xs pull-right" onclick="assignshift(shift,day,index)" style="background-color:#CC0033;"">Assign Shift</button></li>');
                 }
                 for(i=0;i<fridayshifts.length;i++){
-                    numassigned = fridayshifts[i].assigned;
-                    numunassigned = Number(fridayshifts[i].numemployees) - numassigned;
+                    shift = fridayshifts[i]
+                    hours = shift.hours;
+                    index = i
+                    clean_hours = []
+                    for(k=0;k<hours.length;k++){
+                        if(hours[k]< 12){
+                            clean_hours.push(' ' + hours[k]+' AM');
+                        }
+                        else{
+                            j = hours[k]-12
+                            if(j==0){
+                                j=12
+                            }
+                            clean_hours.push(' ' + j+' PM');
+                        }
+                    }
+                    numassigned = shift.assigned;
+                    numunassigned = shift.unassigned;
+                    day = 'Friday'
                     $('#frStats').html('<p><b>Assigned</b>: ' + numassigned + '   <b>Unassigned</b>: ' + numunassigned + '</p>');
+                    $('#frShifts').append('<li style="white-space:pre;margin-bottom:5px;"><b>Hours: </b>' + clean_hours + '   <b>Workers Assigned: </b>' + shift.assignedworkers + '<button type="button" class="btn btn-primary btn-xs pull-right" onclick="assignshift(shift,day,index)" style="background-color:#CC0033;"">Assign Shift</button></li>');
                 }
                 for(i=0;i<saturdayshifts.length;i++){
-                    numassigned = saturdayshifts[i].assigned;
-                    numunassigned = Number(saturdayshifts[i].numemployees) - numassigned;   
+                    shift = saturdayshifts[i]
+                    hours = shift.hours;
+                    index = i
+                    clean_hours = []
+                    for(k=0;k<hours.length;k++){
+                        if(hours[k]< 12){
+                            clean_hours.push(' ' + hours[k]+' AM');
+                        }
+                        else{
+                            j = hours[k]-12
+                            if(j==0){
+                                j=12
+                            }
+                            clean_hours.push(' ' + j+' PM');
+                        }
+                    }
+                    numassigned = shift.assigned;
+                    numunassigned = shift.unassigned;
+                    day = 'Saturday'
                     $('#saStats').html('<p><b>Assigned</b>: ' + numassigned + '   <b>Unassigned</b>: ' + numunassigned + '</p>');
+                    $('#saShifts').append('<li style="white-space:pre;margin-bottom:5px;"><b>Hours: </b>' + clean_hours + '   <b>Workers Assigned: </b>' + shift.assignedworkers + '<button type="button" class="btn btn-primary btn-xs pull-right" onclick="assignshift(shift,day,index)" style="background-color:#CC0033;"">Assign Shift</button></li>');
                 }
                 $('#workerlist').empty();
                 for(i=0;i<workers.length;i++){
-                    console.log(workers[i])
                     $('#workerlist').append('<li>'+workers[i]+'</li>');
                 }
             });
+        }
+        function submitassignment(){
+            shift = curshift;
+            day = curday;
+            index = curindex
+            workersselected = [];
+            duplicate = false;
+            for(i=0;i<$('select').length;i++){
+                name = $($('select')[i]).find(":selected").text()
+                if(workersselected.indexOf(name)>-1){
+                    duplicate = true;
+                }
+                workersselected.push(name)
+            }
+            if(duplicate){
+                alert('Please select unique workers');
+            }
+            else{
+                if(shift.assignedworkers != ''){
+                    assigned_workers = []
+                    for(i=0;i<shift.assignedworkers.length;i++){
+                        assigned_workers.push(shift.assignedworkers[i]);
+                    }
+                    for(i=0;i<workersselected.length;i++){
+                        assigned_workers.push(workersselected[i]);
+                    }
+                }
+                else{
+                    assigned_workers = workersselected
+                }
+                newFirebaseRef = new Firebase("https://amber-inferno-6999.firebaseio.com/shifttimes/"+day+"/"+index);
+                newFirebaseRef.child('assignedworkers').set(assigned_workers)
+                newFirebaseRef.child('assigned').set(assigned_workers.length)
+                newFirebaseRef.child('unassigned').set(0)
+                $('#myModal2').modal('hide');
+                refreshlist();
+            }
+        }
+        $(document).ready(function(){
+            $('#logo').click(function() {
+
+            });
+            refreshlist();
+            document.getElementById("editworkers").addEventListener ("click", editworkers, false);
+            document.getElementById("addworker").addEventListener ("click", addworker, false);
+            function getMaxOfArray(numArray) {
+              return Math.max.apply(null, numArray);
+            }
+            function getMinOfArray(numArray) {
+              return Math.min.apply(null, numArray);
+            }
+            
         });
     </script>
 </html>
