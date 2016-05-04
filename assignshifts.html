@@ -229,6 +229,7 @@
         var curday=''
         var curindex=-1
         function deleteworker(worker){
+            console.log(worker)
             myFirebaseRef.on("value", function(snapshot) {
                 workers = snapshot.val().workers;
                 shifttimes = snapshot.val().workers;
@@ -246,11 +247,13 @@
                         }                        
                     }
                 }
-                idx = workers.indexOf(worker);
-                if(idx>-1){
-                    workers.splice(idx,1);
-                }
             });
+            console.log(workers);
+            idx = workers.indexOf(worker);
+            console.log(idx);
+            if(idx>-1){
+                workers.splice(idx,1);
+            }
             myFirebaseRef.child('workers').set(workers);
         }
         function editworkers(){
@@ -258,9 +261,11 @@
             myFirebaseRef.on("value", function(snapshot) {
                 workers = snapshot.val().workers;
                 $('#modalworkerlist').empty();
-                for(i=0;i<workers.length;i++){
-                    worker = String(workers[i])
-                    $('#modalworkerlist').append('<li style="margin-bottom:5px;">'+worker+'<button type="button" class="close" onclick="deleteworker(worker)" aria-label="Close"><span aria-hidden="true">&times;</span></button></li>');
+                if(typeof(workers) != 'undefined'){
+                    for(i=0;i<workers.length;i++){
+                        var worker = workers[i]
+                        $('#modalworkerlist').append('<li style="margin-bottom:5px;">'+worker+'<button type="button" class="close" onclick="deleteworker(\''+worker+'\')" aria-label="Close"><span aria-hidden="true">&times;</span></button></li>');
+                    }
                 }
             });
         }
@@ -270,7 +275,12 @@
                 myFirebaseRef.on("value", function(snapshot) {
                     workers = snapshot.val().workers;
                 });
-                workers.push(name);
+                if(typeof(workers) != 'undefined'){
+                    workers.push(name);
+                }
+                else{
+                    workers = [name]
+                }
                 myFirebaseRef.child('workers').set(workers);  
             }
         }
@@ -278,7 +288,6 @@
             curshift = shift
             curday = day
             curindex = index
-            console.log(index);
             hours = shift.hours
             clean_hours = []
             for(i=0;i<hours.length;i++){
@@ -327,7 +336,6 @@
                 $('#thShifts').empty();
                 $('#frShifts').empty();
                 $('#saShifts').empty();
-                console.log(sundayshifts.length);
                 numassigned = 0
                 numunassigned = 0
                 for(i=0;i<sundayshifts.length;i++){
@@ -511,8 +519,10 @@
                 numassigned = 0
                 numunassigned = 0
                 $('#workerlist').empty();
-                for(i=0;i<workers.length;i++){
-                    $('#workerlist').append('<li>'+workers[i]+'</li>');
+                if(typeof(workers) != 'undefined'){
+                    for(i=0;i<workers.length;i++){
+                        $('#workerlist').append('<li>'+workers[i]+'</li>');
+                    }
                 }
             });
         }
