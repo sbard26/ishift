@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>iShift</title>
+        <title>Home - iShift</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
         <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
         <meta name="apple-mobile-web-app-capable" content="yes"/>
@@ -11,12 +11,13 @@
         <script src="js/jquery-1.12.3.js"></script>
         <script src="js/jquery-ui.js"></script>
         <script src="js/bootstrap.js"></script>
+        <script src='https://cdn.firebase.com/js/client/2.2.1/firebase.js'></script>
     </head>
     <body>
         <div class = "col-md-2">
             <div class = "container">
                 <div class = "row">
-                    <!-- <div class = "logo"> -->
+<!--                     <div class = "logo"> -->
                     <span class = "logo" onclick="location.href='index.html';">iShift</span>
                     <!-- </div> -->
                 </div>
@@ -24,7 +25,7 @@
             <div class = "container">
                 <div class = "row">
                     <div class="btn-group-vertical sidebar" role="group" aria-label="...">
-                        <a class="btn btn-default sidebar-item" href = "index.html"><b>Calendar View</b></a>
+                        <a class="btn btn-default sidebar-item" href= 'index.html'><b>Calendar View</b></a>
                         <a class="btn btn-default sidebar-item" href = "whosworking.html"><b>Who's Working</b></a>
                         <a class="btn btn-default sidebar-item active" href = "assignshifts.html"><b>Assign Shifts</b></a>
                         <a class="btn btn-default sidebar-item" href = "setstorehours.html"><b>Set Store Hours</b></a>
@@ -42,6 +43,251 @@
                     </div>
                 </div>
             </div>
+            <div class = "container">
+                <div class = "row">
+                    <!-- <button type="button" class="btn btn-default">
+                        <span></span>
+                    </button> -->
+                    <div class = "row" style = "margin-left:0px; margin-top:20px; max-width:80%;">
+                        <p class = "week">Week of March 27 - April 2</p>
+                        <!-- <button type="button" class="btn btn-default">
+                            <span></span>
+                        </button> -->
+                    </div>
+                    <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+                        <div class="panel panel-default">
+                            <div class="panel-heading" role="tab" id="headingOne">
+                                <h4 class="panel-title">
+                                    <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                        Sunday Shifts
+                                        <div id = "suStats" style="white-space:pre;display:inline-block" class="pull-right">
+                                        </div>
+                                    </a>
+                                </h4>
+                            </div>
+                            <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+                                <div class="panel-body">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel panel-default">
+                            <div class="panel-heading" role="tab" id="headingTwo">
+                                <h4 class="panel-title">
+                                    <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                        Monday Shifts
+                                        <div id = "moStats" style="white-space:pre;display:inline-block" class="pull-right">
+                                        </div>                                    
+                                    </a>
+                                </h4>
+                            </div>
+                            <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+                                <div class="panel-body">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel panel-default">
+                            <div class="panel-heading" role="tab" id="headingThree">
+                                <h4 class="panel-title">
+                                    <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                        Tuesday Shifts
+                                        <div id = "tuStats" style="white-space:pre;display:inline-block" class="pull-right">
+                                        </div>
+                                    </a>
+                                </h4>
+                            </div>
+                            <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+                                <div class="panel-body">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel panel-default">
+                            <div class="panel-heading" role="tab" id="headingFour">
+                                <h4 class="panel-title">
+                                    <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                                        Wednesday Shifts
+                                        <div id = "weStats" style="white-space:pre;display:inline-block" class="pull-right">
+                                        </div>
+                                    </a>
+                                </h4>
+                            </div>
+                            <div id="collapseFour" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFour">
+                                <div class="panel-body">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel panel-default">
+                            <div class="panel-heading" role="tab" id="headingFive">
+                                <h4 class="panel-title">
+                                    <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
+                                        Thursday Shifts
+                                        <div id = "thStats" style="white-space:pre;display:inline-block" class="pull-right">
+                                        </div>
+                                    </a>
+                                </h4>
+                            </div>
+                            <div id="collapseFive" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFive">
+                                <div class="panel-body">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel panel-default">
+                            <div class="panel-heading" role="tab" id="headingSix">
+                                <h4 class="panel-title">
+                                    <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseSix" aria-expanded="false" aria-controls="collapseSix">
+                                        Friday Shifts
+                                        <div id = "frStats" style="white-space:pre;display:inline-block" class="pull-right">
+                                        </div>
+                                    </a>
+                                </h4>
+                            </div>
+                            <div id="collapseSix" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingSix">
+                                <div class="panel-body">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel panel-default">
+                            <div class="panel-heading" role="tab" id="headingSeven">
+                                <h4 class="panel-title">
+                                    <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseSeven" aria-expanded="false" aria-controls="collapseSeven">
+                                        Saturday Shifts
+                                        <div id = "saStats" style="white-space:pre;display:inline-block" class="pull-right">
+                                        </div>                                    
+                                    </a>
+                                </h4>
+                            </div>
+                            <div id="collapseSeven" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingSeven">
+                                <div class="panel-body">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <p><b>Workers: </b></p>
+                    <ul class = "list-inline" id = "workerlist">
+                    </ul>
+                    <a class="btn btn-primary reassign-button" style= "background-color:#CC0033 !important;" id="editworkers"><b>Edit Workers</b></a>
+                </div>
+                <div class="modal fade" tabindex="-1" role="dialog" id="myModal">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                <h4 class="modal-title">Edit Workers:</h4>
+                            </div>
+                            <div class="modal-body">
+                                <ul id = "modalworkerlist" style="list-style-type:none;margin-bottom:20px;">
+                                </ul>
+                                <div class="form-group">
+                                    <label for="newworker">Add Worker:</label>
+                                    <input type="text" class="form-control" id="newworker" placeholder="Worker Name">
+                                    <button type="button" style="margin-top:10px;" class="btn btn-default" id="addworker">Add Worker</button>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal" style="background-color:#CC0033;color:#fff">Done</button>
+                            </div>
+                        </div><!-- /.modal-content -->
+                    </div><!-- /.modal-dialog -->
+                </div><!-- /.modal -->
+            </div>
         </div>
     </body>
+    <script>
+        var myFirebaseRef = new Firebase("https://amber-inferno-6999.firebaseio.com/");
+        function deleteworker(worker){
+            myFirebaseRef.on("value", function(snapshot) {
+                workers = snapshot.val().workers;
+                idx = workers.indexOf(worker);
+                if(idx>-1){
+                    workers.splice(idx,1);
+                }
+            });
+            console.log(workers);
+            myFirebaseRef.child('workers').set(workers);
+        }
+        function editworkers(){
+            $('#myModal').modal('show');
+            myFirebaseRef.on("value", function(snapshot) {
+                workers = snapshot.val().workers;
+                $('#modalworkerlist').empty();
+                for(i=0;i<workers.length;i++){
+                    worker = String(workers[i])
+                    $('#modalworkerlist').append('<li style="margin-bottom:5px;">'+worker+'<button type="button" class="close" onclick="deleteworker(worker)" aria-label="Close"><span aria-hidden="true">&times;</span></button></li>');
+                }
+            });
+        }
+        function addworker(){
+            name = $('#newworker').val();
+            if(name != ""){
+                myFirebaseRef.on("value", function(snapshot) {
+                    workers = snapshot.val().workers;
+                });
+                workers.push(name);
+                myFirebaseRef.child('workers').set(workers);  
+            }
+        }
+        $(document).ready(function(){
+            $('#logo').click(function() {
+
+            });
+            document.getElementById("editworkers").addEventListener ("click", editworkers, false);
+            document.getElementById("addworker").addEventListener ("click", addworker, false);
+            function getMaxOfArray(numArray) {
+              return Math.max.apply(null, numArray);
+            }
+            function getMinOfArray(numArray) {
+              return Math.min.apply(null, numArray);
+            }
+            myFirebaseRef.on("value", function(snapshot) {
+                shifttimes = snapshot.val().shifttimes;
+                sundayshifts = shifttimes.Sunday;
+                mondayshifts = shifttimes.Monday;
+                tuesdayshifts = shifttimes.Tuesday;
+                wednesdayshifts = shifttimes.Wednesday;
+                thursdayshifts = shifttimes.Thursday;
+                fridayshifts = shifttimes.Friday;
+                saturdayshifts = shifttimes.Saturday;
+                workers = snapshot.val().workers;
+                for(i=0;i<sundayshifts.length;i++){
+                    numassigned = sundayshifts[i].assigned;
+                    numunassigned = Number(sundayshifts[i].numemployees) - numassigned;
+                    $('#suStats').html('<p><b>Assigned</b>: ' + numassigned + '   <b>Unassigned</b>: ' + numunassigned + '</p>');
+                }
+                for(i=0;i<mondayshifts.length;i++){
+                    numassigned = mondayshifts[i].assigned;
+                    numunassigned = Number(mondayshifts[i].numemployees) - numassigned;
+                    $('#moStats').html('<p><b>Assigned</b>: ' + numassigned + '   <b>Unassigned</b>: ' + numunassigned + '</p>');
+                }
+                for(i=0;i<tuesdayshifts.length;i++){
+                    numassigned = tuesdayshifts[i].assigned;
+                    numunassigned = Number(tuesdayshifts[i].numemployees) - numassigned;
+                    $('#tuStats').html('<p><b>Assigned</b>: ' + numassigned + '   <b>Unassigned</b>: ' + numunassigned + '</p>');
+                }
+                for(i=0;i<wednesdayshifts.length;i++){
+                    numassigned = wednesdayshifts[i].assigned;
+                    numunassigned = Number(wednesdayshifts[i].numemployees) - numassigned;
+                    $('#weStats').html('<p><b>Assigned</b>: ' + numassigned + '   <b>Unassigned</b>: ' + numunassigned + '</p>');
+                }
+                for(i=0;i<thursdayshifts.length;i++){
+                    numassigned = thursdayshifts[i].assigned;
+                    numunassigned = Number(thursdayshifts[i].numemployees) - numassigned;
+                    $('#thStats').html('<p><b>Assigned</b>: ' + numassigned + '   <b>Unassigned</b>: ' + numunassigned + '</p>');
+                }
+                for(i=0;i<fridayshifts.length;i++){
+                    numassigned = fridayshifts[i].assigned;
+                    numunassigned = Number(fridayshifts[i].numemployees) - numassigned;
+                    $('#frStats').html('<p><b>Assigned</b>: ' + numassigned + '   <b>Unassigned</b>: ' + numunassigned + '</p>');
+                }
+                for(i=0;i<saturdayshifts.length;i++){
+                    numassigned = saturdayshifts[i].assigned;
+                    numunassigned = Number(saturdayshifts[i].numemployees) - numassigned;   
+                    $('#saStats').html('<p><b>Assigned</b>: ' + numassigned + '   <b>Unassigned</b>: ' + numunassigned + '</p>');
+                }
+                $('#workerlist').empty();
+                for(i=0;i<workers.length;i++){
+                    console.log(workers[i])
+                    $('#workerlist').append('<li>'+workers[i]+'</li>');
+                }
+            });
+        });
+    </script>
 </html>
