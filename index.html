@@ -147,7 +147,12 @@
                 }
                 for(i=minhour; i<maxhour+1; i++){
                     if(i< 12){
-                        row = "<tr class ='datarow'><td class='cal-item-white'>"+i+" AM</td>"
+                        if(i==0){
+                            row = "<tr class ='datarow'><td class='cal-item-white'>12 AM</td>"
+                        }
+                        else{
+                            row = "<tr class ='datarow'><td class='cal-item-white'>"+i+" AM</td>"
+                        }
                     }
                     else{
                         j = i-12

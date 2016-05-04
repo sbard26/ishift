@@ -304,6 +304,26 @@
                             </tr>
                         </tbody>                   
                     </table>
+                    <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+                        <div class="panel panel-default">
+                            <div class="panel-heading" role="tab" id="headingOne">
+                                <h4 class="panel-title">
+                                    <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                        Current Shifts
+                                        <span class="pull-right small">Click here to view/edit current shifts</span>
+                                        <div id = "suStats" style="white-space:pre;display:inline-block" class="pull-right">
+                                        </div>
+                                    </a>
+                                </h4>
+                            </div>
+                            <div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+                                <div class="panel-body">
+                                    <ul id = "shiftlist" style="list-style-type:none;">
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     <p>Use your mouse to drag over the hours you would like to set as a default shift. Please do so one shift at a time.</p>
                     <div class = "pull-right">
                         <button type="button" class="btn btn-default btn-lg" style="background-color:#CC0033;color:#fff" id="submithours">Submit Shift</button>
@@ -584,6 +604,11 @@
                 $('#myModal').modal('show');
             }
         }
+        function deleteshift(shift,day,index){
+            console.log(shift);
+            console.log(day);
+            console.log(index);
+        }
         function setcal(){
             myFirebaseRef.on("value", function(snapshot) {
                 storehours = snapshot.val().storehours;
@@ -634,6 +659,35 @@
                     }
                 }
                 $('.cal-container').css('display', '');
+                shifttimes = snapshot.val().shifttimes;
+                for(key in shifttimes){
+                    if(shifttimes.hasOwnProperty(key)){
+                        for(j=0;j<shifttimes[key].length;j++){
+                            shift = shifttimes[key][j]
+                            hours = shift.hours
+                            clean_hours = []
+                            index = j
+                            for(k=0;k<hours.length;k++){
+                                if(hours[k]< 12){
+                                    if(hours[k] == 0){
+                                        clean_hours.push(' 12 AM');
+                                    }
+                                    else{
+                                        clean_hours.push(' ' + hours[k]+' AM');
+                                    }
+                                }
+                                else{
+                                    p = hours[k]-12
+                                    if(p==0){
+                                        p=12
+                                    }
+                                    clean_hours.push(' ' + p +' PM');
+                                }
+                            }
+                            $('#shiftlist').append('<li style="margin-bottom:5px;white-space:pre;"><b>Day: </b>'+key+'  <b>Hours: </b>'+clean_hours+'  <b>Workers Assigned: </b>' + shift.assignedworkers+ ' <b>Unassigned: </b>' + shift.unassigned + '<button type="button" class="close" onclick="deleteshift(\''+shift+","+key+","+index+'\')" aria-label="Close"><span aria-hidden="true">&times;</span></button></li>');
+                        }
+                    }
+                }
             });
         }
         $(document).ready(function(){
