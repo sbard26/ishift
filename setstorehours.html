@@ -335,7 +335,7 @@
         saturdayh = []
         var myFirebaseRef = new Firebase("https://amber-inferno-6999.firebaseio.com/");
         function submitHours(){
-            tds = $(".cal-item");
+            tds = $(".cal-item-clickable");
             elems = []
             for(i=0; i< tds.length; i++){
                 if(!($(tds[i]).attr('class').indexOf('tlabel') >= 0) && !($(tds[i]).attr('class').indexOf('disabled') >= 0)){
