@@ -750,44 +750,48 @@
                         }
                         for(i=0; i<selected.length; i++){
                             if(selected[i] == 'Sunday'){
-                                if(typeof(shifttimes.Sunday) == 'undefined'){
-                                    shifttimes.Sunday = []
+                                if((typeof(shifttimes.Sunday) == 'undefined') || (shifttimes.Sunday == '')){
+                                    shift_list = []
                                 }
-                                console.log(shifttimes.Sunday)
-                                shifttimes.Sunday.push({hours: shift_hours, unassigned: numemployees, assigned: 0, assignedworkers: ''});
+                                else{
+                                    shift_list = shifttimes.Sunday
+                                }
+                                console.log(shift_list)
+                                shift_list.push({hours: shift_hours, unassigned: numemployees, assigned: 0, assignedworkers: ''})
+                                shifttimes.Sunday = shift_list;
                             }
                             else if(selected[i] == 'Monday'){
-                                if(typeof(shifttimes.Monday) == 'undefined'){
+                                if((typeof(shifttimes.Monday) == 'undefined') || (shifttimes.Monday == '')){
                                     shifttimes.Monday = []
                                 }
                                 shifttimes.Monday.push({hours: shift_hours, unassigned: numemployees, assigned: 0, assignedworkers: ''});
                             }
                             else if(selected[i] == 'Tuesday'){
-                                if(typeof(shifttimes.Tuesday) == 'undefined'){
+                                if((typeof(shifttimes.Tuesday) == 'undefined') || (shifttimes.Tuesday == '')){
                                     shifttimes.Tuesday = []
                                 }
                                 shifttimes.Tuesday.push({hours: shift_hours, unassigned: numemployees, assigned: 0, assignedworkers: ''});
                             }
                             else if(selected[i] == 'Wednesday'){
-                                if(typeof(shifttimes.Wednesday) == 'undefined'){
+                                if((typeof(shifttimes.Wednesday) == 'undefined') || (shifttimes.Wednesday == '')){
                                     shifttimes.Wednesday = []
                                 }
                                 shifttimes.Wednesday.push({hours: shift_hours, unassigned: numemployees, assigned: 0, assignedworkers: ''});
                             }
                             else if(selected[i] == 'Thursday'){
-                                if(typeof(shifttimes.Thursday) == 'undefined'){
+                                if((typeof(shifttimes.Thursday) == 'undefined') || (shifttimes.Thursday == '')){
                                     shifttimes.Thursday = []
                                 }
                                 shifttimes.Thursday.push({hours: shift_hours, unassigned: numemployees, assigned: 0, assignedworkers: ''});
                             }
                             else if(selected[i] == 'Friday'){
-                                if(typeof(shifttimes.Friday) == 'undefined'){
+                                if((typeof(shifttimes.Friday) == 'undefined') || (shifttimes.Friday == '')){
                                     shifttimes.Friday = []
                                 }
                                 shifttimes.Friday.push({hours: shift_hours, unassigned: numemployees, assigned: 0, assignedworkers: ''});
                             }
                             else if(selected[i] == 'Saturday'){
-                                if(typeof(shifttimes.Saturday) == 'undefined'){
+                                if((typeof(shifttimes.Saturday) == 'undefined') || (shifttimes.Saturday == '')){
                                     shifttimes.Saturday = []
                                 }
                                 shifttimes.Saturday.push({hours: shift_hours, unassigned: numemployees, assigned: 0, assignedworkers: ''});
