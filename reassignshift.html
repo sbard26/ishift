@@ -45,6 +45,16 @@
             </div>
             <div class = "container">
                 <div class = "row">
+                    <div class = "row" style = "margin-left:0px; max-width:80%; margin-top:15px">
+                        <p class = "week">Week of March 27 - April 2</p>
+                        <!-- <button type="button" class="btn btn-default">
+                            <span></span>
+                        </button> -->
+                        <div class = "color-keys pull-right">
+                            <div class = "key selected"></div> <p style = "display:inline-block;"> = Selected</p>
+                            <div class = "key unselected"></div> <p style = "display:inline-block;"> = Unselected</p>
+                        </div>
+                    </div>
                     <div id = "cal-wrapper" class = "table-responsive" style="max-width:80%">
                         <table class="table table-bordered calendar" id="calendar">
                             <tbody class = "calendartable">
@@ -72,7 +82,7 @@
             myFirebaseRef.on("value", function(snapshot) {
                 workers = snapshot.val().workers;
                 for(i=0;i<workers.length;i++){
-                    tr = '<tr id = "'+i+'"><td class = "cal-item tlabel">'+workers[i]+'</td><td class = "cal-item disabled" id = "su'+i+'"></td><td class = "cal-item disabled" id = "mo'+i+'"></td><td class = "cal-item disabled" id = "tu'+i+'"></td><td class = "cal-item disabled" id = "we'+i+'"></td><td class = "cal-item disabled" id = "th'+i+'"></td><td class = "cal-item disabled" id = "fr'+i+'"></td></tr>'
+                    tr = '<tr id = "'+i+'"><td class = "cal-item tlabel">'+workers[i]+'</td><td class = "cal-item-clickable disabled" id = "su'+i+'"></td><td class = "cal-item-clickable disabled" id = "mo'+i+'"></td><td class = "cal-item-clickable disabled" id = "tu'+i+'"></td><td class = "cal-item-clickable disabled" id = "we'+i+'"></td><td class = "cal-item-clickable disabled" id = "th'+i+'"></td><td class = "cal-item-clickable disabled" id = "fr'+i+'"></td></tr>'
                     $('.calendartable').append(tr);
                 }
                 var isMouseDown = false;
