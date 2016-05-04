@@ -355,8 +355,8 @@
                             clean_hours.push(' ' + j+' PM');
                         }
                     }
-                    numassigned += shift.assigned;
-                    numunassigned += shift.unassigned;
+                    numassigned += Number(shift.assigned);
+                    numunassigned += Number(shift.unassigned);
                     day = 'Sunday'
                     $('#suShifts').append('<li style="white-space:pre;margin-bottom:5px;"><b>Hours: </b>' + clean_hours + '   <b>Workers Assigned: </b>' + shift.assignedworkers + '   <b>Number Unassigned: <b>'+shift.unassigned+'<button type="button" class="btn btn-primary btn-xs pull-right" onclick="assignshift(shift,day,index)" style="background-color:#CC0033;"">Assign Shift</button></li>');
                 }
@@ -380,8 +380,8 @@
                             clean_hours.push(' ' + j+' PM');
                         }
                     }
-                    numassigned = shift.assigned;
-                    numunassigned = shift.unassigned;
+                    numassigned += Number(shift.assigned);
+                    numunassigned += Number(shift.unassigned);
                     day = 'Monday'
                     $('#moShifts').append('<li style="white-space:pre;margin-bottom:5px;"><b>Hours: </b>' + clean_hours + '   <b>Workers Assigned: </b>' + shift.assignedworkers + '   <b>Number Unassigned: <b>'+shift.unassigned+'<button type="button" class="btn btn-primary btn-xs pull-right" onclick="assignshift(shift,day,index)" style="background-color:#CC0033;"">Assign Shift</button></li>');
                 }
@@ -405,8 +405,8 @@
                             clean_hours.push(' ' + j+' PM');
                         }
                     }
-                    numassigned = shift.assigned;
-                    numunassigned = shift.unassigned;
+                    numassigned += Number(shift.assigned);
+                    numunassigned += Number(shift.unassigned);
                     day = 'Tuesday'
                     $('#tuStats').html('<p><b>Assigned</b>: ' + numassigned + '   <b>Unassigned</b>: ' + numunassigned + '</p>');
                     $('#tuShifts').append('<li style="white-space:pre;margin-bottom:5px;"><b>Hours: </b>' + clean_hours + '   <b>Workers Assigned: </b>' + shift.assignedworkers + '   <b>Number Unassigned: <b>'+shift.unassigned+'<button type="button" class="btn btn-primary btn-xs pull-right" onclick="assignshift(shift,day,index)" style="background-color:#CC0033;"">Assign Shift</button></li>');
@@ -431,8 +431,8 @@
                             clean_hours.push(' ' + j+' PM');
                         }
                     }
-                    numassigned = shift.assigned;
-                    numunassigned = shift.unassigned;
+                    numassigned += Number(shift.assigned);
+                    numunassigned += Number(shift.unassigned);
                     day = 'Wednesday'
                     $('#weStats').html('<p><b>Assigned</b>: ' + numassigned + '   <b>Unassigned</b>: ' + numunassigned + '</p>');
                     $('#weShifts').append('<li style="white-space:pre;margin-bottom:5px;"><b>Hours: </b>' + clean_hours + '   <b>Workers Assigned: </b>' + shift.assignedworkers + '   <b>Number Unassigned: <b>'+shift.unassigned+'<button type="button" class="btn btn-primary btn-xs pull-right" onclick="assignshift(shift,day,index)" style="background-color:#CC0033;"">Assign Shift</button></li>');
@@ -457,8 +457,8 @@
                             clean_hours.push(' ' + j+' PM');
                         }
                     }
-                    numassigned = shift.assigned;
-                    numunassigned = shift.unassigned;
+                    numassigned += Number(shift.assigned);
+                    numunassigned += Number(shift.unassigned);
                     day = 'Thursday'
                     $('#thStats').html('<p><b>Assigned</b>: ' + numassigned + '   <b>Unassigned</b>: ' + numunassigned + '</p>');
                     $('#thShifts').append('<li style="white-space:pre;margin-bottom:5px;"><b>Hours: </b>' + clean_hours + '   <b>Workers Assigned: </b>' + shift.assignedworkers + '   <b>Number Unassigned: <b>'+shift.unassigned+'<button type="button" class="btn btn-primary btn-xs pull-right" onclick="assignshift(shift,day,index)" style="background-color:#CC0033;"">Assign Shift</button></li>');
@@ -483,8 +483,8 @@
                             clean_hours.push(' ' + j+' PM');
                         }
                     }
-                    numassigned = shift.assigned;
-                    numunassigned = shift.unassigned;
+                    numassigned += Number(shift.assigned);
+                    numunassigned += Number(shift.unassigned);
                     day = 'Friday'
                     $('#frStats').html('<p><b>Assigned</b>: ' + numassigned + '   <b>Unassigned</b>: ' + numunassigned + '</p>');
                     $('#frShifts').append('<li style="white-space:pre;margin-bottom:5px;"><b>Hours: </b>' + clean_hours + '   <b>Workers Assigned: </b>' + shift.assignedworkers + '   <b>Number Unassigned: <b>'+shift.unassigned+'<button type="button" class="btn btn-primary btn-xs pull-right" onclick="assignshift(shift,day,index)" style="background-color:#CC0033;"">Assign Shift</button></li>');
@@ -509,8 +509,8 @@
                             clean_hours.push(' ' + j+' PM');
                         }
                     }
-                    numassigned = shift.assigned;
-                    numunassigned = shift.unassigned;
+                    numassigned += Number(shift.assigned);
+                    numunassigned += Number(shift.unassigned);
                     day = 'Saturday'
                     $('#saStats').html('<p><b>Assigned</b>: ' + numassigned + '   <b>Unassigned</b>: ' + numunassigned + '</p>');
                     $('#saShifts').append('<li style="white-space:pre;margin-bottom:5px;"><b>Hours: </b>' + clean_hours + '   <b>Workers Assigned: </b>' + shift.assignedworkers + '   <b>Number Unassigned: <b>'+shift.unassigned+'<button type="button" class="btn btn-primary btn-xs pull-right" onclick="assignshift(shift,day,index)" style="background-color:#CC0033;"">Assign Shift</button></li>');
