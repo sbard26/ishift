@@ -125,9 +125,9 @@
             //     Friday: '',
             //     Saturday: ''
             // });
-            myFirebaseRef.child('workers').set(
-                ['Spencer', 'Max', 'Sam']
-            )
+            // myFirebaseRef.child('workers').set(
+            //     ['Spencer', 'Max', 'Sam']
+            // )
             myFirebaseRef.on("value", function(snapshot) {
                 storehours = snapshot.val().storehours;
                 hours_list = []

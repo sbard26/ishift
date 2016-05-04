@@ -794,7 +794,11 @@
                     $('#hourslist').empty();
                     $('#repeatboxes').empty();
                     myFirebaseRef.child('shifttimes').update(shifttimes);
-                    setcal();
+                }
+                for(i=0;i<$(".cal-item-clickable").length;i++){
+                    if($($(".cal-item-clickable")[i]).attr('class').indexOf("disabled") == -1){
+                        $($(".cal-item-clickable")[i]).addClass("disabled");
+                    }
                 }
             }
             var isMouseDown = false;
