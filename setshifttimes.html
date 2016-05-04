@@ -348,7 +348,7 @@
           return Math.min.apply(null, numArray);
         }
         function submitHours(){
-            tds = $(".cal-item");
+            tds = $(".cal-item-clickable");
             elems = []
             for(i=0; i< tds.length; i++){
                 if(!($(tds[i]).attr('class').indexOf('tlabel') >= 0) && !($(tds[i]).attr('class').indexOf('disabled') >= 0)){
@@ -558,10 +558,15 @@
                 day = 'Saturday'
                 $('#hourslist').append("<li style='text-align:center'><b>Saturday: </b>" + saturday + "</li><hr>");
             }
+            console.log(day);
             for(i=0; i< days_of_the_week.length; i++){
                 if(days_of_the_week[i] != day){
                   checkbox = '<div class="checkbox"><label><input type="checkbox" id = "' + days_of_the_week[i] + 'box"> ' +days_of_the_week[i]+ '</label></div>'
                   $('#repeatboxes').append(checkbox);
+                }
+                else{
+                    checkbox = '<div class="checkbox"><label><input type="checkbox" disabled="disabled" checked="checked" id = "' + days_of_the_week[i] + 'box">' + days_of_the_week[i] +'</label></div>'
+                    $('#repeatboxes').append(checkbox);
                 }
             }
             if(count > 1){
