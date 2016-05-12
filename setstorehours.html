@@ -522,35 +522,41 @@
         function setcal(){
             myFirebaseRef.on("value", function(snapshot) {
                 storehours = snapshot.val().storehours;
-                hours_list = []
-                hours_list.push.apply(hours_list, storehours.sunday)
-                hours_list.push.apply(hours_list, storehours.monday)
-                hours_list.push.apply(hours_list, storehours.tuesday)
-                hours_list.push.apply(hours_list, storehours.wednesday)
-                hours_list.push.apply(hours_list, storehours.thursday)
-                hours_list.push.apply(hours_list, storehours.friday)
-                hours_list.push.apply(hours_list, storehours.saturday)
                 for(i=0; i<24; i++){
-                    if(storehours.sunday.indexOf(i.toString()) >= 0){
-                        $('#su'+i).removeClass('disabled');
+                    if(storehours.sunday != undefined){
+                        if(storehours.sunday.indexOf(i.toString()) >= 0){
+                            $('#su'+i).removeClass('disabled');
+                        }
                     }
-                    if(storehours.monday.indexOf(i.toString()) >= 0){
-                        $('#mo'+i).removeClass('disabled');
+                    if(storehours.monday != undefined){
+                        if(storehours.monday.indexOf(i.toString()) >= 0){
+                            $('#mo'+i).removeClass('disabled');
+                        }
                     }
-                    if(storehours.tuesday.indexOf(i.toString()) >= 0){
-                        $('#tu'+i).removeClass('disabled');
+                    if(storehours.tuesday != undefined){
+                        if(storehours.tuesday.indexOf(i.toString()) >= 0){
+                            $('#tu'+i).removeClass('disabled');
+                        }
                     }
-                    if(storehours.wednesday.indexOf(i.toString()) >= 0){
-                        $('#we'+i).removeClass('disabled');
+                    if(storehours.wednesday != undefined){
+                        if(storehours.wednesday.indexOf(i.toString()) >= 0){
+                            $('#we'+i).removeClass('disabled');
+                        }
                     }
-                    if(storehours.thursday.indexOf(i.toString()) >= 0){
-                        $('#th'+i).removeClass('disabled');
+                    if(storehours.thursday != undefined){
+                        if(storehours.thursday.indexOf(i.toString()) >= 0){
+                            $('#th'+i).removeClass('disabled');
+                        }
                     }
-                    if(storehours.friday.indexOf(i.toString()) >= 0){
-                        $('#fr'+i).removeClass('disabled');
+                    if(storehours.friday != undefined){
+                        if(storehours.friday.indexOf(i.toString()) >= 0){
+                            $('#fr'+i).removeClass('disabled');
+                        }
                     }
-                    if(storehours.saturday.indexOf(i.toString()) >= 0){
-                        $('#sa'+i).removeClass('disabled');
+                    if(storehours.saturday != undefined){
+                        if(storehours.saturday.indexOf(i.toString()) >= 0){
+                            $('#sa'+i).removeClass('disabled');
+                        }
                     }
                 }
             });

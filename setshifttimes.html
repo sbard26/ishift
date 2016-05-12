@@ -624,33 +624,89 @@
                     }
                 }
                 for(i=minhour; i<maxhour+1; i++){
-                    if(!(storehours.sunday.indexOf(i.toString()) >= 0)){
-                        $('#su' + i).removeClass('disabled');
-                        $('#su' + i).addClass('extra-disabled');
+                    if(storehours.sunday != undefined){
+                        if(!(storehours.sunday.indexOf(i.toString()) >= 0)){
+                            $('#su' + i).removeClass('disabled');
+                            $('#su' + i).addClass('extra-disabled');
+                        }
                     }
-                    if(!(storehours.monday.indexOf(i.toString()) >= 0)){
-                        $('#mo' + i).removeClass('disabled');
-                        $('#mo' + i).addClass('extra-disabled');                    
+                    else{
+                        for(i=minhour; i<maxhour+1; i++){
+                            $('#su' + i).removeClass('disabled');
+                            $('#su' + i).addClass('extra-disabled');
+                        }
                     }
-                    if(!(storehours.tuesday.indexOf(i.toString()) >= 0)){
-                        $('#tu' + i).removeClass('disabled');
-                        $('#tu' + i).addClass('extra-disabled');
+                    if(storehours.monday != undefined){
+                        if(!(storehours.monday.indexOf(i.toString()) >= 0)){
+                            $('#mo' + i).removeClass('disabled');
+                            $('#mo' + i).addClass('extra-disabled');                    
+                        }                        
                     }
-                    if(!(storehours.wednesday.indexOf(i.toString()) >= 0)){
-                        $('#we' + i).removeClass('disabled');
-                        $('#we' + i).addClass('extra-disabled');
+                    else{
+                        for(i=minhour; i<maxhour+1; i++){
+                            $('#mo' + i).removeClass('disabled');
+                            $('#mo' + i).addClass('extra-disabled');
+                        }
                     }
-                    if(!(storehours.thursday.indexOf(i.toString()) >= 0)){
-                        $('#th' + i).removeClass('disabled');
-                        $('#th' + i).addClass('extra-disabled');
+                    if(storehours.tuesday != undefined){
+                        if(!(storehours.tuesday.indexOf(i.toString()) >= 0)){
+                            $('#tu' + i).removeClass('disabled');
+                            $('#tu' + i).addClass('extra-disabled');
+                        }
                     }
-                    if(!(storehours.friday.indexOf(i.toString()) >= 0)){
-                        $('#fr' + i).removeClass('disabled');
-                        $('#fr' + i).addClass('extra-disabled');
+                    else{
+                        for(i=minhour; i<maxhour+1; i++){
+                            $('#tu' + i).removeClass('disabled');
+                            $('#tu' + i).addClass('extra-disabled');
+                        }
                     }
-                    if(!(storehours.saturday.indexOf(i.toString()) >= 0)){
-                        $('#sa' + i).removeClass('disabled');
-                        $('#sa' + i).addClass('extra-disabled');
+                    if(storehours.wednesday != undefined){
+                        if(!(storehours.wednesday.indexOf(i.toString()) >= 0)){
+                            $('#we' + i).removeClass('disabled');
+                            $('#we' + i).addClass('extra-disabled');
+                        }
+                    }
+                    else{
+                        for(i=minhour; i<maxhour+1; i++){
+                            $('#we' + i).removeClass('disabled');
+                            $('#we' + i).addClass('extra-disabled');
+                        }
+                    }
+                    if(storehours.thursday != undefined){
+                        if(!(storehours.thursday.indexOf(i.toString()) >= 0)){
+                            $('#th' + i).removeClass('disabled');
+                            $('#th' + i).addClass('extra-disabled');
+                        }
+                    }
+                    else{
+                        for(i=minhour; i<maxhour+1; i++){
+                            $('#th' + i).removeClass('disabled');
+                            $('#th' + i).addClass('extra-disabled');
+                        }
+                    }
+                    if(storehours.friday != undefined){
+                        if(!(storehours.friday.indexOf(i.toString()) >= 0)){
+                            $('#fr' + i).removeClass('disabled');
+                            $('#fr' + i).addClass('extra-disabled');
+                        }                        
+                    }
+                    else{
+                        for(i=minhour; i<maxhour+1; i++){
+                            $('#fr' + i).removeClass('disabled');
+                            $('#fr' + i).addClass('extra-disabled');
+                        }
+                    }
+                    if(storehours.saturday != undefined){
+                        if(!(storehours.saturday.indexOf(i.toString()) >= 0)){
+                            $('#sa' + i).removeClass('disabled');
+                            $('#sa' + i).addClass('extra-disabled');
+                        }
+                    }
+                    else{
+                        for(i=minhour; i<maxhour+1; i++){
+                            $('#sa' + i).removeClass('disabled');
+                            $('#sa' + i).addClass('extra-disabled');
+                        }
                     }
                 }
                 $('.cal-container').css('display', '');
