@@ -284,7 +284,10 @@
                 myFirebaseRef.child('workers').set(workers);  
             }
         }
-        function assignshift(shift,day,index){
+        function assignshift(event){
+            shift = event.data.shift
+            day = event.data.day
+            index = event.data.index
             curshift = shift
             curday = day
             curindex = index
@@ -307,12 +310,13 @@
             });
             $('#shifthours').html(clean_hours);
             $('#shiftform').empty()
-            for(i=0;i<shift.unassigned;i++){
-                n = i + 1
+            console.log(shift.unassigned);
+            for(a=0;a<Number(shift.unassigned);a++){
+                n = a + 1
                 $('#shiftform').append('<h5 style=margin-bottom:5px;>Worker ' + n + ':</h5>')
-                $('#shiftform').append('<select class="form-control" style="margin-bottom:10px;" id="workerselect'+i+'">')
-                for(j=0;j<workers.length;j++){
-                    $('#workerselect'+i).append('<option>' +workers[j]+ '</option>');
+                $('#shiftform').append('<select class="form-control" style="margin-bottom:10px;" id="workerselect'+a+'">')
+                for(b=0;b<workers.length;b++){
+                    $('#workerselect'+a).append('<option>' +workers[b]+ '</option>');
                 }
                 $('#shiftform').append('</select>')
             }         
@@ -338,7 +342,7 @@
                 $('#saShifts').empty();
                 numassigned = 0
                 numunassigned = 0
-                if(typeof(sundayshifts) != 'undefined'){
+                if((typeof(sundayshifts) != 'undefined') && (sundayshifts != "")){
                     for(i=0;i<sundayshifts.length;i++){
                         shift = sundayshifts[i]
                         hours = shift.hours;
@@ -359,13 +363,14 @@
                         numassigned += Number(shift.assigned);
                         numunassigned += Number(shift.unassigned);
                         day = 'Sunday'
-                        $('#suShifts').append('<li style="white-space:pre;margin-bottom:5px;"><b>Hours: </b>' + clean_hours + '   <b>Workers Assigned: </b>' + shift.assignedworkers + '   <b>Number Unassigned: <b>'+shift.unassigned+'<button type="button" class="btn btn-primary btn-xs pull-right" onclick="assignshift(shift,day,index)" style="background-color:#CC0033;"">Assign Shift</button></li>');
+                        $('#suShifts').append('<li style="white-space:pre;margin-bottom:5px;"><b>Hours: </b>' + clean_hours + '   <b>Workers Assigned: </b>' + shift.assignedworkers + '   <b>Number Unassigned: <b>'+shift.unassigned+'<button type="button" class="btn btn-primary btn-xs pull-right" id = "suBtn" style="background-color:#CC0033;"">Assign Shift</button></li>');
+                        $("#suBtn").click({shift: shift, day: day, index: index}, assignshift);
                     }
                 }
                 $('#suStats').html('<p><b>Assigned</b>: ' + numassigned + '   <b>Unassigned</b>: ' + numunassigned + '</p>');
                 numassigned = 0
                 numunassigned = 0   
-                if(typeof(mondayshifts) != 'undefined'){          
+                if((typeof(mondayshifts) != 'undefined') && (mondayshifts != "")){
                     for(i=0;i<mondayshifts.length;i++){
                         shift = mondayshifts[i]
                         hours = shift.hours;
@@ -386,13 +391,14 @@
                         numassigned += Number(shift.assigned);
                         numunassigned += Number(shift.unassigned);
                         day = 'Monday'
-                        $('#moShifts').append('<li style="white-space:pre;margin-bottom:5px;"><b>Hours: </b>' + clean_hours + '   <b>Workers Assigned: </b>' + shift.assignedworkers + '   <b>Number Unassigned: <b>'+shift.unassigned+'<button type="button" class="btn btn-primary btn-xs pull-right" onclick="assignshift(shift,day,index)" style="background-color:#CC0033;"">Assign Shift</button></li>');
+                        $('#moShifts').append('<li style="white-space:pre;margin-bottom:5px;"><b>Hours: </b>' + clean_hours + '   <b>Workers Assigned: </b>' + shift.assignedworkers + '   <b>Number Unassigned: <b>'+shift.unassigned+'<button type="button" class="btn btn-primary btn-xs pull-right" id = "moBtn" style="background-color:#CC0033;"">Assign Shift</button></li>');
+                        $("#moBtn").click({shift: shift, day: day, index: index}, assignshift);
                     }
                 }
                 $('#moStats').html('<p><b>Assigned</b>: ' + numassigned + '   <b>Unassigned</b>: ' + numunassigned + '</p>');
                 numassigned = 0
                 numunassigned = 0
-                if(typeof(tuesdayshifts) != 'undefined'){
+                if((typeof(tuesdayshifts) != 'undefined') && (tuesdayshifts != "")){
                     for(i=0;i<tuesdayshifts.length;i++){
                         shift = tuesdayshifts[i]
                         hours = shift.hours;
@@ -414,13 +420,14 @@
                         numunassigned += Number(shift.unassigned);
                         day = 'Tuesday'
                         $('#tuStats').html('<p><b>Assigned</b>: ' + numassigned + '   <b>Unassigned</b>: ' + numunassigned + '</p>');
-                        $('#tuShifts').append('<li style="white-space:pre;margin-bottom:5px;"><b>Hours: </b>' + clean_hours + '   <b>Workers Assigned: </b>' + shift.assignedworkers + '   <b>Number Unassigned: <b>'+shift.unassigned+'<button type="button" class="btn btn-primary btn-xs pull-right" onclick="assignshift(shift,day,index)" style="background-color:#CC0033;"">Assign Shift</button></li>');
+                        $('#tuShifts').append('<li style="white-space:pre;margin-bottom:5px;"><b>Hours: </b>' + clean_hours + '   <b>Workers Assigned: </b>' + shift.assignedworkers + '   <b>Number Unassigned: <b>'+shift.unassigned+'<button type="button" class="btn btn-primary btn-xs pull-right" id = "tuBtn" style="background-color:#CC0033;"">Assign Shift</button></li>');
+                        $("#tuBtn").click({shift: shift, day: day, index: index}, assignshift);
                     }
                 }
                 $('#tuStats').html('<p><b>Assigned</b>: ' + numassigned + '   <b>Unassigned</b>: ' + numunassigned + '</p>');
                 numassigned = 0
                 numunassigned = 0
-                if(typeof(wednesdayshifts) != 'undefined'){
+                if((typeof(wednesdayshifts) != 'undefined') && (wednesdayshifts != "")){
                     for(i=0;i<wednesdayshifts.length;i++){
                         shift = wednesdayshifts[i]
                         hours = shift.hours;
@@ -442,13 +449,14 @@
                         numunassigned += Number(shift.unassigned);
                         day = 'Wednesday'
                         $('#weStats').html('<p><b>Assigned</b>: ' + numassigned + '   <b>Unassigned</b>: ' + numunassigned + '</p>');
-                        $('#weShifts').append('<li style="white-space:pre;margin-bottom:5px;"><b>Hours: </b>' + clean_hours + '   <b>Workers Assigned: </b>' + shift.assignedworkers + '   <b>Number Unassigned: <b>'+shift.unassigned+'<button type="button" class="btn btn-primary btn-xs pull-right" onclick="assignshift(shift,day,index)" style="background-color:#CC0033;"">Assign Shift</button></li>');
+                        $('#weShifts').append('<li style="white-space:pre;margin-bottom:5px;"><b>Hours: </b>' + clean_hours + '   <b>Workers Assigned: </b>' + shift.assignedworkers + '   <b>Number Unassigned: <b>'+shift.unassigned+'<button type="button" class="btn btn-primary btn-xs pull-right" id = "weBtn" style="background-color:#CC0033;"">Assign Shift</button></li>');
+                        $("#weBtn").click({shift: shift, day: day, index: index}, assignshift);
                     }
                 }
                 $('#weStats').html('<p><b>Assigned</b>: ' + numassigned + '   <b>Unassigned</b>: ' + numunassigned + '</p>');
                 numassigned = 0
                 numunassigned = 0
-                if(typeof(thursdayshifts) != 'undefined'){
+                if((typeof(thursdayshifts) != 'undefined') && (thursdayshifts != "")){
                     for(i=0;i<thursdayshifts.length;i++){
                         shift = thursdayshifts[i]
                         hours = shift.hours;
@@ -470,13 +478,14 @@
                         numunassigned += Number(shift.unassigned);
                         day = 'Thursday'
                         $('#thStats').html('<p><b>Assigned</b>: ' + numassigned + '   <b>Unassigned</b>: ' + numunassigned + '</p>');
-                        $('#thShifts').append('<li style="white-space:pre;margin-bottom:5px;"><b>Hours: </b>' + clean_hours + '   <b>Workers Assigned: </b>' + shift.assignedworkers + '   <b>Number Unassigned: <b>'+shift.unassigned+'<button type="button" class="btn btn-primary btn-xs pull-right" onclick="assignshift(shift,day,index)" style="background-color:#CC0033;"">Assign Shift</button></li>');
+                        $('#thShifts').append('<li style="white-space:pre;margin-bottom:5px;"><b>Hours: </b>' + clean_hours + '   <b>Workers Assigned: </b>' + shift.assignedworkers + '   <b>Number Unassigned: <b>'+shift.unassigned+'<button type="button" class="btn btn-primary btn-xs pull-right" id = "thBtn" style="background-color:#CC0033;"">Assign Shift</button></li>');
+                        $("#thBtn").click({shift: shift, day: day, index: index}, assignshift);
                     }
                 }
                 $('#thStats').html('<p><b>Assigned</b>: ' + numassigned + '   <b>Unassigned</b>: ' + numunassigned + '</p>');
                 numassigned = 0
                 numunassigned = 0
-                if(typeof(fridayshifts) != 'undefined'){
+                if((typeof(fridayshifts) != 'undefined') && (fridayshifts != "")){
                     for(i=0;i<fridayshifts.length;i++){
                         shift = fridayshifts[i]
                         hours = shift.hours;
@@ -498,13 +507,14 @@
                         numunassigned += Number(shift.unassigned);
                         day = 'Friday'
                         $('#frStats').html('<p><b>Assigned</b>: ' + numassigned + '   <b>Unassigned</b>: ' + numunassigned + '</p>');
-                        $('#frShifts').append('<li style="white-space:pre;margin-bottom:5px;"><b>Hours: </b>' + clean_hours + '   <b>Workers Assigned: </b>' + shift.assignedworkers + '   <b>Number Unassigned: <b>'+shift.unassigned+'<button type="button" class="btn btn-primary btn-xs pull-right" onclick="assignshift(shift,day,index)" style="background-color:#CC0033;"">Assign Shift</button></li>');
+                        $('#frShifts').append('<li style="white-space:pre;margin-bottom:5px;"><b>Hours: </b>' + clean_hours + '   <b>Workers Assigned: </b>' + shift.assignedworkers + '   <b>Number Unassigned: <b>'+shift.unassigned+'<button type="button" class="btn btn-primary btn-xs pull-right" id = "frBtn" style="background-color:#CC0033;"">Assign Shift</button></li>');
+                        $("#frBtn").click({shift: shift, day: day, index: index}, assignshift);
                     }
                 }
                 $('#frStats').html('<p><b>Assigned</b>: ' + numassigned + '   <b>Unassigned</b>: ' + numunassigned + '</p>');
                 numassigned = 0
                 numunassigned = 0
-                if(typeof(saturdayshifts) != 'undefined'){
+                if((typeof(saturdayshifts) != 'undefined') && (saturdayshifts != "")){
                     for(i=0;i<saturdayshifts.length;i++){
                         shift = saturdayshifts[i]
                         hours = shift.hours;
@@ -526,7 +536,8 @@
                         numunassigned += Number(shift.unassigned);
                         day = 'Saturday'
                         $('#saStats').html('<p><b>Assigned</b>: ' + numassigned + '   <b>Unassigned</b>: ' + numunassigned + '</p>');
-                        $('#saShifts').append('<li style="white-space:pre;margin-bottom:5px;"><b>Hours: </b>' + clean_hours + '   <b>Workers Assigned: </b>' + shift.assignedworkers + '   <b>Number Unassigned: <b>'+shift.unassigned+'<button type="button" class="btn btn-primary btn-xs pull-right" onclick="assignshift(shift,day,index)" style="background-color:#CC0033;"">Assign Shift</button></li>');
+                        $('#saShifts').append('<li style="white-space:pre;margin-bottom:5px;"><b>Hours: </b>' + clean_hours + '   <b>Workers Assigned: </b>' + shift.assignedworkers + '   <b>Number Unassigned: <b>'+shift.unassigned+'<button type="button" class="btn btn-primary btn-xs pull-right"  id = "saBtn" style="background-color:#CC0033;"">Assign Shift</button></li>');
+                        $("#saBtn").click({shift: shift, day: day, index: index}, assignshift);
                     }
                 }
                 $('#saStats').html('<p><b>Assigned</b>: ' + numassigned + '   <b>Unassigned</b>: ' + numunassigned + '</p>');
@@ -576,6 +587,7 @@
                 $('#myModal2').modal('hide');
                 refreshlist();
             }
+            location.reload();
         }
         $(document).ready(function(){
             $('#logo').click(function() {
